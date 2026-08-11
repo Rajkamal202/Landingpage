@@ -61,6 +61,13 @@
   --color-danger: #d0342c;
   --color-info: var(--color-brand-500);
 
+  /* Hover shades for the filled semantic buttons. SPEC §4.2 gives one value
+     per semantic colour, but §4.6 only allows animating colour — not filter —
+     so a `brightness()` hover is not an option and the darker step has to be
+     a real token. Both keep white text above 4.5:1. */
+  --color-danger-600: #b02a23;
+  --color-success-600: #127757;
+
   /* Four surface aliases only. Text and borders address the ink ramp
      directly — a second full vocabulary is how design systems drift. */
   --color-page: var(--color-ink-50);
@@ -212,6 +219,50 @@
   @keyframes dash {
     to {
       stroke-dashoffset: -16;
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97) translateY(4px);
+    }
+  }
+  @keyframes pop-out {
+    to {
+      opacity: 0;
+      transform: scale(0.97) translateY(4px);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+      transform: scale(0.98) translateY(8px);
+    }
+  }
+  @keyframes dialog-out {
+    to {
+      opacity: 0;
+      transform: scale(0.98) translateY(8px);
+    }
+  }
+  @keyframes sheet-in {
+    from {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes sheet-out {
+    to {
+      transform: translateX(100%);
     }
   }
 }
@@ -375,6 +426,58 @@
     black calc(100% - var(--spacing-6)),
     transparent 100%
   );
+}
+
+/* Radix drives `data-state` on its portalled surfaces. These four utilities
+   are the only enter/exit choreography in the product, so every floating layer
+   arrives and leaves the same way (SPEC §4.6). Transform origin comes from
+   Radix's own `--radix-*-transform-origin`, which makes them origin-aware. */
+@utility anim-pop {
+  &[data-state="open"] {
+    animation: pop-in var(--dur-fast) var(--ease-out);
+  }
+  &[data-state="closed"] {
+    animation: pop-out var(--dur-instant) var(--ease-out) forwards;
+  }
+}
+
+@utility anim-fade {
+  &[data-state="open"] {
+    animation: fade-in var(--dur-base) var(--ease-out);
+  }
+  &[data-state="closed"] {
+    animation: fade-out var(--dur-fast) var(--ease-out) forwards;
+  }
+}
+
+@utility anim-dialog {
+  &[data-state="open"] {
+    animation: dialog-in var(--dur-base) var(--ease-out);
+  }
+  &[data-state="closed"] {
+    animation: dialog-out var(--dur-fast) var(--ease-out) forwards;
+  }
+}
+
+@utility anim-sheet {
+  &[data-state="open"] {
+    animation: sheet-in var(--dur-base) var(--ease-out);
+  }
+  &[data-state="closed"] {
+    animation: sheet-out var(--dur-fast) var(--ease-out) forwards;
+  }
+}
+
+/* The checkbox tick draws itself rather than popping in. Lives here so the
+   component stays readable and the timing stays on the token scale. */
+@utility check-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--dur-fast) var(--ease-out);
+
+  [data-state="checked"] & {
+    stroke-dashoffset: 0;
+  }
 }
 
 /* Dot grid for the node canvas backdrop. */

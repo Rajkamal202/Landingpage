@@ -44,10 +44,12 @@ const RULES = [
   },
   {
     id: "no-arbitrary-utility",
-    // Tailwind arbitrary values: p-[13px], text-[#fff], w-[calc(...)]
-    re: /(?:^|["'`\s:])(?:-?[a-z][a-z0-9]*(?:-[a-z0-9]+)*)-\[[^\]]+\]/g,
-    message:
-      "Arbitrary utility value. Add a token to globals.css instead of a one-off.",
+    // Arbitrary *values* — `p-[13px]`, `text-[#fff]`, `w-[calc(…)]`.
+    // A trailing `:` means it is an arbitrary *variant* — `data-[state=open]:`,
+    // `has-[input:focus]:`, `group-data-[…]:` — which is a selector, not a
+    // hardcoded value, and is allowed.
+    re: /(?:^|["'`\s:])(?:-?[a-z][a-z0-9]*(?:-[a-z0-9]+)*)-\[[^\]]+\](?!:)/g,
+    message: "Arbitrary utility value. Add a token to globals.css instead of a one-off.",
   },
   {
     id: "no-transition-all",
