@@ -1,7 +1,14 @@
 # Vireo — Build Plan
 
 **Plan v2** (v1 written, critiqued against SPEC §13, revised — audit trail in §12)
-Author: lead frontend / design. Status: **awaiting approval before Phase 2.**
+Author: lead frontend / design.
+
+**Status: Phase 1 complete.** The gate passes — `pnpm typecheck`, `pnpm lint`,
+`pnpm lint:tokens` and `pnpm build` are all clean, `/_dev/components` renders
+every primitive in every state, the browser console is silent on every route,
+and there is no horizontal overflow at 390 / 768 / 1280 / 1920. Everything under
+`components/ui`, `lib/` and the app shell is now **frozen** for Phase 2.
+Deviations and judgement calls are recorded in `DECISIONS.md`.
 
 ---
 

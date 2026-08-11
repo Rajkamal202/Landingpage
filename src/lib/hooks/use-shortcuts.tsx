@@ -9,6 +9,12 @@ import * as React from "react";
  * Editors *register* their shortcuts here; the dialog renders whatever is
  * registered. Four editors writing four `?` dialogs would produce four
  * different lists that disagree with each other and with the code.
+ *
+ * The registry is an external store rather than context state. Putting the
+ * version counter in the context value made the context identity change on
+ * every registration, which re-ran every consumer's registration effect, which
+ * bumped the version again — an infinite loop. Here the context value is
+ * created once and never changes; subscribers are notified out of band.
  */
 
 export interface ShortcutDefinition {
@@ -26,17 +32,19 @@ export interface ShortcutDefinition {
   hidden?: boolean;
 }
 
-interface RegistryEntry extends ShortcutDefinition {
+export interface RegistryEntry extends ShortcutDefinition {
   id: string;
 }
 
-interface ShortcutContextValue {
+interface ShortcutStore {
   register: (entry: RegistryEntry) => () => void;
-  list: () => RegistryEntry[];
-  version: number;
+  subscribe: (listener: () => void) => () => void;
+  getSnapshot: () => readonly RegistryEntry[];
 }
 
-const ShortcutContext = React.createContext<ShortcutContextValue | null>(null);
+const ShortcutContext = React.createContext<ShortcutStore | null>(null);
+
+const EMPTY: readonly RegistryEntry[] = [];
 
 function normalize(keys: string): string {
   return keys
@@ -51,7 +59,7 @@ function eventSignature(event: KeyboardEvent): string {
   if (event.metaKey || event.ctrlKey) parts.push("mod");
   if (event.altKey) parts.push("alt");
   if (event.shiftKey) parts.push("shift");
-  const key = event.key.length === 1 ? event.key.toLowerCase() : event.key.toLowerCase();
+  const key = event.key.toLowerCase();
   parts.push(key === " " ? "space" : key);
   return parts.sort().join("+");
 }
@@ -64,26 +72,41 @@ function isTypingTarget(target: EventTarget | null): boolean {
 }
 
 export function ShortcutProvider({ children }: { children: React.ReactNode }) {
-  const entries = React.useRef(new Map<string, RegistryEntry>());
-  const [version, setVersion] = React.useState(0);
+  const store = React.useMemo<ShortcutStore>(() => {
+    const entries = new Map<string, RegistryEntry>();
+    const listeners = new Set<() => void>();
+    // `useSyncExternalStore` compares snapshots by identity, so the array is
+    // rebuilt only when the registry actually changes.
+    let snapshot: readonly RegistryEntry[] = EMPTY;
 
-  const register = React.useCallback((entry: RegistryEntry) => {
-    entries.current.set(entry.id, entry);
-    setVersion((v) => v + 1);
-    return () => {
-      entries.current.delete(entry.id);
-      setVersion((v) => v + 1);
+    const emit = () => {
+      snapshot = [...entries.values()];
+      for (const listener of listeners) listener();
+    };
+
+    return {
+      register(entry) {
+        entries.set(entry.id, entry);
+        emit();
+        return () => {
+          entries.delete(entry.id);
+          emit();
+        };
+      },
+      subscribe(listener) {
+        listeners.add(listener);
+        return () => listeners.delete(listener);
+      },
+      getSnapshot: () => snapshot,
     };
   }, []);
-
-  const list = React.useCallback(() => [...entries.current.values()], []);
 
   React.useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
       const signature = eventSignature(event);
       const typing = isTypingTarget(event.target);
 
-      for (const entry of entries.current.values()) {
+      for (const entry of store.getSnapshot()) {
         if (entry.enabled === false) continue;
         if (normalize(entry.keys) !== signature) continue;
         if ((entry.skipInInputs ?? true) && typing) continue;
@@ -95,19 +118,14 @@ export function ShortcutProvider({ children }: { children: React.ReactNode }) {
 
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [store]);
 
-  const value = React.useMemo<ShortcutContextValue>(
-    () => ({ register, list, version }),
-    [register, list, version],
-  );
-
-  return <ShortcutContext.Provider value={value}>{children}</ShortcutContext.Provider>;
+  return <ShortcutContext.Provider value={store}>{children}</ShortcutContext.Provider>;
 }
 
 /** Registers one shortcut for the lifetime of the calling component. */
 export function useShortcut(definition: ShortcutDefinition): void {
-  const ctx = React.useContext(ShortcutContext);
+  const store = React.useContext(ShortcutContext);
   const id = React.useId();
   const latest = React.useRef(definition);
   latest.current = definition;
@@ -115,33 +133,39 @@ export function useShortcut(definition: ShortcutDefinition): void {
   const { keys, label, group, enabled, hidden, skipInInputs } = definition;
 
   React.useEffect(() => {
-    if (!ctx) return;
-    return ctx.register({
+    if (!store) return;
+    return store.register({
       id,
       keys,
       label,
       group,
-      enabled,
-      hidden,
-      skipInInputs,
+      ...(enabled === undefined ? {} : { enabled }),
+      ...(hidden === undefined ? {} : { hidden }),
+      ...(skipInInputs === undefined ? {} : { skipInInputs }),
       handler: (event) => latest.current.handler(event),
     });
-  }, [ctx, id, keys, label, group, enabled, hidden, skipInInputs]);
+  }, [store, id, keys, label, group, enabled, hidden, skipInInputs]);
 }
 
 /** Everything currently bound, grouped, for the `?` dialog. */
 export function useShortcutList(): Array<{ group: string; items: RegistryEntry[] }> {
-  const ctx = React.useContext(ShortcutContext);
-  const version = ctx?.version ?? 0;
+  const store = React.useContext(ShortcutContext);
+
+  const entries = React.useSyncExternalStore(
+    store?.subscribe ?? noopSubscribe,
+    store?.getSnapshot ?? getEmpty,
+    getEmpty,
+  );
 
   return React.useMemo(() => {
-    if (!ctx) return [];
     const groups = new Map<string, RegistryEntry[]>();
-    for (const entry of ctx.list()) {
+    for (const entry of entries) {
       if (entry.hidden) continue;
       groups.set(entry.group, [...(groups.get(entry.group) ?? []), entry]);
     }
     return [...groups.entries()].map(([group, items]) => ({ group, items }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ctx, version]);
+  }, [entries]);
 }
+
+const noopSubscribe = () => () => undefined;
+const getEmpty = () => EMPTY;

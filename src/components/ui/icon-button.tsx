@@ -84,6 +84,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       loading = false,
       disabled,
       type = "button",
+      onClick,
       ...props
     },
     ref,
@@ -96,8 +97,15 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         type={type}
         aria-label={label}
         aria-busy={loading || undefined}
-        disabled={disabled ?? loading}
-        className={cn(iconButtonVariants({ variant, size, shape }), className)}
+        aria-disabled={loading || undefined}
+        disabled={disabled}
+        onClick={loading ? undefined : onClick}
+        // Busy, not disabled — see the note in `Button`.
+        className={cn(
+          iconButtonVariants({ variant, size, shape }),
+          loading && "pointer-events-none",
+          className,
+        )}
         {...props}
       >
         {loading ? <Spinner size={iconSize} /> : <Icon glyph={glyph} size={iconSize} />}

@@ -65,8 +65,10 @@ export function WorkspaceTabs() {
   );
 
   if (tabs.length === 0) {
+    // Hidden on narrow viewports: truncated to "No ope…" it says nothing and
+    // costs the top bar a third of its width. The + button is the affordance.
     return (
-      <p className="text-body-sm truncate px-2 text-ink-400">
+      <p className="text-body-sm hidden truncate px-2 text-ink-400 sm:block">
         No open projects. Open one from the workspace to start a tab.
       </p>
     );

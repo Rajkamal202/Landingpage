@@ -66,13 +66,19 @@ export function TypeScale() {
       <p className="eyebrow text-ink-400">Type scale</p>
       <ul className="flex flex-col divide-y divide-ink-200 rounded-lg border border-ink-200 bg-surface">
         {TYPE_STEPS.map((step) => (
-          <li key={step.token} className="flex items-baseline justify-between gap-6 p-5">
+          <li
+            key={step.token}
+            className="flex flex-col gap-2 p-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6"
+          >
             <span className={cn(step.className, "min-w-0 truncate text-ink-950")}>
               Clone what already works
             </span>
-            <span className="flex shrink-0 items-baseline gap-4">
+            {/* The metadata only shrinks away on narrow viewports — at 390px
+                there is no room for a 68px sample and its specification on one
+                line, and truncating the specification would make it useless. */}
+            <span className="flex items-baseline gap-4 sm:shrink-0">
               <span className="mono-sm text-ink-400">{step.note}</span>
-              <span className="mono-sm w-24 text-right text-ink-700">{step.token}</span>
+              <span className="mono-sm text-ink-700 sm:w-24 sm:text-right">{step.token}</span>
             </span>
           </li>
         ))}

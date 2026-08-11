@@ -68,14 +68,18 @@ export function TopBar() {
       </ScrollArea>
 
       <div className="flex shrink-0 items-center gap-1">
+        {/* The label collapses below `sm`; the icon and the accessible name
+            both stay, so the control never becomes ambiguous. */}
         <Button
           variant="ghost"
           size="sm"
           iconStart={IconPanelRight}
+          aria-label="Library"
           aria-expanded={libraryOpen}
           onClick={() => setLibraryOpen(!libraryOpen)}
+          className="px-2 sm:px-3"
         >
-          Library
+          <span className="hidden sm:inline">Library</span>
         </Button>
         <TokenMeter
           balance={balance.data}

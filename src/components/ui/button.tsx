@@ -138,6 +138,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
     disabled,
     children,
     type = "button",
+    onClick,
     ...props
   },
   ref,
@@ -146,10 +147,21 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function 
     <button
       ref={ref}
       type={type}
-      className={cn(buttonVariants({ variant, size, shape, block }), className)}
-      disabled={disabled ?? loading}
+      className={cn(
+        buttonVariants({ variant, size, shape, block }),
+        // A loading button is *busy*, not disabled: it keeps its variant's
+        // fill so it still reads as the primary action, and stays focusable so
+        // a screen reader can announce the busy state. Setting `disabled`
+        // instead would drop it out of the tab order and paint it with the
+        // disabled fill, which reads as "this control died".
+        loading && "pointer-events-none",
+        className,
+      )}
+      disabled={disabled}
+      aria-disabled={loading || undefined}
       aria-busy={loading || undefined}
       data-loading={loading || undefined}
+      onClick={loading ? undefined : onClick}
       {...props}
     >
       <ButtonContent size={size} loading={loading} iconStart={iconStart} iconEnd={iconEnd}>
