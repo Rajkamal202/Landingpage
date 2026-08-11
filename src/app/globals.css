@@ -1,0 +1,384 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Vireo design tokens — SPEC §4
+   ───────────────────────────────────────────────────────────────────────
+   Tailwind's default palette, spacing scale, shadows and type scale are
+   DELETED below. `text-gray-500`, `bg-blue-500`, `shadow-md`, `text-sm`
+   and `p-7` do not compile. Off-token values are build errors, not code
+   review conversations.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-*: initial;
+  --spacing-*: initial;
+  --spacing: initial;
+  --shadow-*: initial;
+  --text-*: initial;
+  --radius-*: initial;
+  --font-*: initial;
+  --ease-*: initial;
+  --animate-*: initial;
+
+  /* ── Keywords ──────────────────────────────────────────────────────── */
+  --color-inherit: inherit;
+  --color-current: currentColor;
+  --color-transparent: transparent;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* ── Brand ─────────────────────────────────────────────────────────── */
+  --color-brand-50: #eef3ff;
+  --color-brand-100: #d9e3ff;
+  --color-brand-200: #b8ccff;
+  --color-brand-400: #6e93f7;
+  --color-brand-500: #3d6ff0;
+  --color-brand-600: #2b55cc;
+  --color-brand-700: #1f3f9e;
+  --color-brand-900: #14285f;
+
+  /* ── Hero illustration palette (marketing only) ────────────────────── */
+  --color-sky-deep: #2b5be0;
+  --color-sky-mid: #4277f0;
+  --color-cloud-cream: #f5efe6;
+  --color-cloud-rose: #f0d5d8;
+  --color-streak: #c24bc9;
+
+  /* ── Neutrals — slightly cool, never pure gray ─────────────────────── */
+  --color-ink-950: #0b0c0e;
+  --color-ink-900: #16181c;
+  --color-ink-700: #3a3f47;
+  --color-ink-500: #6b717c;
+  --color-ink-400: #8c929c;
+  --color-ink-300: #c3c8d0;
+  --color-ink-200: #e1e4e9;
+  --color-ink-100: #eff1f4;
+  --color-ink-50: #f7f8fa;
+
+  /* ── Semantic ──────────────────────────────────────────────────────── */
+  --color-success: #17916b;
+  --color-warning: #b87514;
+  --color-danger: #d0342c;
+  --color-info: var(--color-brand-500);
+
+  /* Four surface aliases only. Text and borders address the ink ramp
+     directly — a second full vocabulary is how design systems drift. */
+  --color-page: var(--color-ink-50);
+  --color-surface: var(--color-white);
+  --color-surface-sunken: var(--color-ink-100);
+  --color-focus: var(--color-brand-500);
+
+  /* ── Editor track accents ──────────────────────────────────────────── */
+  --color-track-video: #3d6ff0;
+  --color-track-audio: #17916b;
+  --color-track-text: #8b5cf6;
+  --color-track-overlay: #e0812b;
+
+  /* ── Typography (SPEC §4.3) ────────────────────────────────────────── */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+
+  /* rem so browser text resize works (WCAG 1.4.4); comments are the spec
+     px values at a 16px root. */
+  --text-display-xl: 4.25rem; /* 68 / 72 */
+  --text-display-xl--line-height: 4.5rem;
+  --text-display-xl--letter-spacing: -0.03em;
+  --text-display-xl--font-weight: 500;
+
+  --text-display-lg: 3rem; /* 48 / 54 */
+  --text-display-lg--line-height: 3.375rem;
+  --text-display-lg--letter-spacing: -0.025em;
+  --text-display-lg--font-weight: 500;
+
+  --text-display-md: 2.125rem; /* 34 / 40 */
+  --text-display-md--line-height: 2.5rem;
+  --text-display-md--letter-spacing: -0.02em;
+  --text-display-md--font-weight: 500;
+
+  --text-title-lg: 1.5rem; /* 24 / 32 */
+  --text-title-lg--line-height: 2rem;
+  --text-title-lg--letter-spacing: -0.015em;
+  --text-title-lg--font-weight: 500;
+
+  --text-title-md: 1.125rem; /* 18 / 26 */
+  --text-title-md--line-height: 1.625rem;
+  --text-title-md--letter-spacing: -0.01em;
+  --text-title-md--font-weight: 500;
+
+  --text-body-lg: 1.0625rem; /* 17 / 28 */
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: -0.005em;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 0.9375rem; /* 15 / 24 */
+  --text-body-md--line-height: 1.5rem;
+  --text-body-md--font-weight: 400;
+
+  --text-body-sm: 0.84375rem; /* 13.5 / 20 */
+  --text-body-sm--line-height: 1.25rem;
+  --text-body-sm--font-weight: 400;
+
+  --text-label: 0.78125rem; /* 12.5 / 16 */
+  --text-label--line-height: 1rem;
+  --text-label--letter-spacing: 0.01em;
+  --text-label--font-weight: 500;
+
+  /* Hero headline, mobile-first: 34/38 → md 44/48 → lg 68/72 (SPEC §4.3) */
+  --text-hero-sm: 2.125rem;
+  --text-hero-sm--line-height: 2.375rem;
+  --text-hero-sm--letter-spacing: -0.02em;
+  --text-hero-sm--font-weight: 500;
+
+  --text-hero-md: 2.75rem;
+  --text-hero-md--line-height: 3rem;
+  --text-hero-md--letter-spacing: -0.025em;
+  --text-hero-md--font-weight: 500;
+
+  --text-hero-lg: 4.25rem;
+  --text-hero-lg--line-height: 4.5rem;
+  --text-hero-lg--letter-spacing: -0.03em;
+  --text-hero-lg--font-weight: 500;
+
+  /* ── Spacing — SPEC §4.4 allowed steps ONLY ────────────────────────── */
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+  --spacing-32: 128px;
+  /* 7, 9, 11, 14, 18 … deliberately absent. `p-7` will not compile. */
+
+  /* Named chrome dimensions, also on the spacing namespace so they work
+     with every w-/h-/p-/gap- utility with zero arbitrary values. */
+  --spacing-topbar: 56px;
+  --spacing-panel: 280px;
+  --spacing-sheet: 420px;
+  --spacing-track-head: 120px;
+  --spacing-rail: 96px;
+  --spacing-control-sm: 28px;
+  --spacing-control-md: 36px;
+  --spacing-control-lg: 44px;
+
+  /* ── Containers ────────────────────────────────────────────────────── */
+  --container-marketing: 75rem; /* 1200px */
+  --container-measure: 68ch; /* marketing prose measure, SPEC §4.3 */
+
+  /* ── Radii (SPEC §4.5) ─────────────────────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  /* ── Elevation — four levels, two-layer, never Tailwind's ──────────── */
+  --shadow-elev-1: 0 1px 2px rgb(11 12 14 / 0.04), 0 1px 3px rgb(11 12 14 / 0.06);
+  --shadow-elev-2: 0 2px 4px rgb(11 12 14 / 0.04), 0 6px 16px rgb(11 12 14 / 0.08);
+  --shadow-elev-3: 0 4px 8px rgb(11 12 14 / 0.05), 0 16px 32px rgb(11 12 14 / 0.1);
+  --shadow-elev-4: 0 8px 16px rgb(11 12 14 / 0.06), 0 32px 64px rgb(11 12 14 / 0.14);
+
+  /* ── Motion (SPEC §4.6) ────────────────────────────────────────────── */
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-linear: linear;
+
+  --dur-instant: 90ms;
+  --dur-fast: 160ms;
+  --dur-base: 240ms;
+  --dur-slow: 420ms;
+
+  --animate-spin: spin 0.7s linear infinite;
+  --animate-shimmer: shimmer 1.6s var(--ease-in-out) infinite;
+  --animate-dash: dash 1s linear infinite;
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  @keyframes dash {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Layering. Radix portals to <body>; these keep the stack honest.
+   ═══════════════════════════════════════════════════════════════════════ */
+:root {
+  --z-base: 0;
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-overlay: 30;
+  --z-dropdown: 40;
+  --z-dialog: 50;
+  --z-toast: 60;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-page);
+    color: var(--color-ink-950);
+    font-family: var(--font-sans);
+    font-size: var(--text-body-md);
+    line-height: var(--text-body-md--line-height);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Numbers compared against other numbers never wobble. */
+  .font-mono,
+  [data-numeric] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* SPEC §11 — visible focus on everything, one ring, never removed. */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  ::selection {
+    background: var(--color-brand-100);
+    color: var(--color-ink-950);
+  }
+
+  /* Headings inherit weight from the type scale token, not from the UA. */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: inherit;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Radix scroll-lock compensation without layout shift. */
+  body[data-scroll-locked] {
+    overflow: hidden;
+  }
+
+  /* SPEC §4.6 — implemented ONCE, globally. Motion components layer a
+     useReducedMotion() guard on top for transform/layout work. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 1ms !important;
+      animation-delay: 0ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 1ms !important;
+      transition-delay: 0ms !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Composed utilities — each exists so the correct thing is the shortest
+   thing to type.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* SPEC §4.6: never `transition-all`. This is the only transition shorthand
+   in the codebase. Compose duration with `duration-(--dur-fast)`. */
+@utility transition-ui {
+  transition-property:
+    color, background-color, border-color, box-shadow, transform, opacity, outline-color;
+  transition-timing-function: var(--ease-out);
+  transition-duration: var(--dur-instant);
+}
+
+/* SPEC §4.3 `caption`: size, tracking and uppercase are one decision. */
+@utility eyebrow {
+  font-size: 0.71875rem; /* 11.5 */
+  line-height: 1rem; /* 16 */
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+/* SPEC §4.3 `mono-sm`: family and size are one decision. */
+@utility mono-sm {
+  font-family: var(--font-mono);
+  font-size: 0.78125rem; /* 12.5 */
+  line-height: 1rem; /* 16 */
+  font-weight: 450;
+  font-variant-numeric: tabular-nums;
+}
+
+/* SPEC §4.5: floating chrome — nav pill, FloatingToolbar, popovers. */
+@utility glass {
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+}
+
+/* SPEC §11: 44×44 minimum on coarse pointers, without inflating dense
+   desktop toolbars. */
+@utility touch-target {
+  @media (pointer: coarse) {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* Explicit ring for elements that manage their own focus presentation
+   (segmented controls, grid cells, canvas nodes). */
+@utility ring-focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* Inset ring for controls whose 2px offset would collide with a neighbour
+   in a dense toolbar. */
+@utility ring-focus-inset {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+/* Horizontal overflow fade for tab strips and rails. */
+@utility fade-x {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black var(--spacing-6),
+    black calc(100% - var(--spacing-6)),
+    transparent 100%
+  );
+}
+
+/* Dot grid for the node canvas backdrop. */
+@utility dot-grid {
+  background-image: radial-gradient(circle at 1px 1px, var(--color-ink-300) 1px, transparent 0);
+  background-size: 16px 16px;
+}
