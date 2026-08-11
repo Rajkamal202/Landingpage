@@ -7,7 +7,7 @@
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p e2e/tsconfig.json",
     "lint": "eslint .",
     "lint:tokens": "node scripts/lint-tokens.mjs",
     "check": "pnpm typecheck && pnpm lint && pnpm lint:tokens",
@@ -16,7 +16,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "gen:media": "node scripts/gen-media.mjs"
+    "gen:media": "node scripts/gen-media.mjs",
+    "e2e:a11y": "playwright test a11y",
+    "e2e:responsive": "playwright test responsive",
+    "e2e:motion": "playwright test motion"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
