@@ -30,8 +30,22 @@ const HEX_EXEMPT = [
   path.join("src", "lib", "cn.ts"),
 ];
 
-/** Illustration and generated-media code legitimately carries raw colour. */
-const HEX_EXEMPT_DIRS = [path.join("src", "components", "marketing", "illustration")];
+/**
+ * Directories where a raw hex is data rather than styling:
+ *
+ * - `lib/fixtures` models *user content* — a brand palette, a caption fill, a
+ *   layer colour. Those are values a user picks in a colour well; they cannot
+ *   come from our token scale, and pretending otherwise would mean the brand
+ *   kit could only hold four colours.
+ * - the hero illustration is hand-drawn artwork with its own named palette.
+ *
+ * Components rendering these values still go through the inline-style rule,
+ * which requires a `dynamic:` justification at the point of use.
+ */
+const HEX_EXEMPT_DIRS = [
+  path.join("src", "lib", "fixtures"),
+  path.join("src", "components", "marketing", "illustration"),
+];
 
 const RULES = [
   {
