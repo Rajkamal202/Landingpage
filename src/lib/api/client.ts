@@ -1,4 +1,5 @@
 import { createRng } from "@/lib/seeded-random";
+import { FIXTURE_NOW } from "@/lib/fixtures/seed";
 
 /**
  * SPEC §2: every data access goes through `src/lib/api/*`. Swapping to a real
@@ -10,6 +11,18 @@ import { createRng } from "@/lib/seeded-random";
  */
 
 const latencyRng = createRng(0x1a7e);
+
+/**
+ * The clock relative timestamps are formatted against.
+ *
+ * Fixtures are dated from a fixed epoch so "2 hours ago" is stable across runs
+ * and machines. Components ask the API layer rather than importing the fixture
+ * constant, so swapping in a real backend — where this becomes `Date.now()` —
+ * touches this function and nothing else.
+ */
+export function referenceTime(): number {
+  return FIXTURE_NOW;
+}
 
 /** Simulated network latency, seeded so runs are reproducible. */
 export function delay(min: number, max: number): Promise<void> {

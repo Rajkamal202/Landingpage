@@ -57,7 +57,23 @@ const eslintConfig = [
       "jsx-a11y/aria-activedescendant-has-tabindex": "error",
       "jsx-a11y/click-events-have-key-events": "error",
       "jsx-a11y/no-static-element-interactions": "error",
-      "jsx-a11y/no-noninteractive-element-interactions": "error",
+      // The default handler list includes onLoad and onError, which are
+      // lifecycle events rather than user interactions — an <img onLoad> that
+      // swaps out a skeleton is not an accessibility problem. Everything that
+      // is genuinely an interaction stays in the list.
+      "jsx-a11y/no-noninteractive-element-interactions": [
+        "error",
+        {
+          handlers: [
+            "onClick",
+            "onMouseDown",
+            "onMouseUp",
+            "onKeyPress",
+            "onKeyDown",
+            "onKeyUp",
+          ],
+        },
+      ],
       "jsx-a11y/interactive-supports-focus": "error",
       "jsx-a11y/label-has-associated-control": ["error", { assert: "either" }],
       "jsx-a11y/no-redundant-roles": "error",

@@ -115,6 +115,15 @@ for (const file of await walk(SRC)) {
   const source = readFileSync(file, "utf8");
   const lines = source.split("\n");
 
+  /**
+   * A file-level opt-out, for the rare module whose whole subject matter is
+   * the thing a rule forbids — a colour picker deals in raw hex by definition.
+   * It must state a reason, and it only ever disables one named rule.
+   */
+  const fileDisabled = new Set(
+    [...source.matchAll(/token-lint-disable-file\s+([\w-]+)\s+—/g)].map((match) => match[1]),
+  );
+
   lines.forEach((line, i) => {
     // Comments describe the rules; they don't break them.
     const trimmed = line.trim();
@@ -132,7 +141,7 @@ for (const file of await walk(SRC)) {
 
     for (const rule of RULES) {
       if (rule.applies && !rule.applies(rel)) continue;
-      if (disabled.has(rule.id)) continue;
+      if (disabled.has(rule.id) || fileDisabled.has(rule.id)) continue;
       rule.re.lastIndex = 0;
       const match = rule.re.exec(line);
       if (!match) continue;

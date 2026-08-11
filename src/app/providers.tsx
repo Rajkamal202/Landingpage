@@ -1,33 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { MotionConfig } from "motion/react";
 
 /**
- * `reducedMotion="user"` makes every Motion component honour the OS setting
- * without a per-component guard for transform/opacity work. The global CSS
- * media query in `globals.css` covers plain CSS transitions. SPEC §4.6 asks
- * for this to be implemented once — this is that once.
+ * Root providers — deliberately almost empty.
+ *
+ * Only what *every* route needs lives here. TanStack Query, the shortcut
+ * registry and the toaster are mounted in the app shell instead, because
+ * shipping them to the marketing page costs it real bundle weight for
+ * machinery no marketing route uses (SPEC §13: Lighthouse ≥95 on `/`).
+ *
+ * `reducedMotion="user"` is global: it makes every Motion component honour the
+ * OS setting without a per-component guard, and the CSS media query in
+ * `globals.css` covers plain CSS transitions. Between the two, SPEC §4.6's
+ * "implement this once, globally" is satisfied.
  */
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            staleTime: 30_000,
-            gcTime: 5 * 60_000,
-            retry: 1,
-            refetchOnWindowFocus: false,
-          },
-        },
-      }),
-  );
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <MotionConfig reducedMotion="user">{children}</MotionConfig>
-    </QueryClientProvider>
-  );
+  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
 }
