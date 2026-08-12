@@ -63,9 +63,12 @@ export function TopBar() {
       <ScrollArea orientation="horizontal" fadeEdges className="min-w-0 flex-1">
         <div className="flex items-center gap-1 px-2 py-1">
           <WorkspaceTabs />
-          <NewProjectButton />
         </div>
       </ScrollArea>
+
+      {/* Outside the scroll area on purpose. Inside it the button scrolled away
+          with the tabs and, at 390px, overlapped the last tab's name. */}
+      <NewProjectButton />
 
       <div className="flex shrink-0 items-center gap-1">
         {/* The label collapses below `sm`; the icon and the accessible name

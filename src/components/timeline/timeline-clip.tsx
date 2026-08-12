@@ -129,7 +129,10 @@ export function TimelineClip({ clipId, trackId }: TimelineClipProps) {
           >
             <ClipBody clip={clip} asset={asset} width={width} />
 
-            {clip.kind === "video" || clip.kind === "overlay" ? (
+            {/* Video only. A filmstrip body carries no text, so the clip needs
+                this badge to be identifiable; an overlay body already renders
+                its own label and was showing it twice. */}
+            {clip.kind === "video" ? (
               <span className="text-body-sm absolute bottom-1 left-1 max-w-full truncate rounded-sm bg-ink-950/70 px-1 text-white">
                 {clip.label}
               </span>
