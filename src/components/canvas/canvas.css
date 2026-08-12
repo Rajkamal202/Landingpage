@@ -1,0 +1,137 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   Node canvas surface — SPEC §8.4
+
+   React Flow ships a base stylesheet that positions the pane, the viewport,
+   the handles and the selection rectangle. We import it for that geometry
+   and then repaint every visible surface here, in our own tokens: no default
+   node chrome, no default edge colour, no default handle dot, no grey
+   marquee. Every value below resolves to a token from `globals.css`.
+
+   The selectors are deliberately `.react-flow <ours>` rather than bare
+   classes. React Flow's base stylesheet is unlayered, so it outranks
+   Tailwind's utility layer; matching its specificity and arriving after it
+   is what makes these declarations win.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+.canvas-surface {
+  /* React Flow reads these before falling back to its own defaults. */
+  --xy-selection-background-color: color-mix(in oklab, var(--color-brand-500) 8%, transparent);
+  --xy-selection-border: 1px solid var(--color-brand-500);
+  --xy-connectionline-stroke: var(--color-brand-500);
+  --xy-connectionline-stroke-width: 2;
+  --xy-attribution-background-color: transparent;
+  --xy-edge-stroke: var(--color-ink-300);
+  --xy-edge-stroke-selected: var(--color-brand-500);
+  --xy-edge-stroke-width: 2;
+}
+
+/* ── Backdrop ──────────────────────────────────────────────────────────
+   The dot grid lives inside the viewport, so panning and zooming move it
+   with the graph as a single GPU transform rather than repainting a
+   background-position on every frame. It is sized to cover the pannable
+   area at the 0.25 minimum zoom.
+   ────────────────────────────────────────────────────────────────────── */
+.canvas-grid-plane {
+  position: absolute;
+  left: -10000px;
+  top: -10000px;
+  width: 20000px;
+  height: 20000px;
+  pointer-events: none;
+}
+
+/* ── Ports ─────────────────────────────────────────────────────────────
+   SPEC §8.4: 10px circles, typed by colour. 10px is not on the §4.4
+   spacing scale — it is a port glyph, not layout rhythm — so it is named
+   here once rather than being spelled as an arbitrary utility at four call
+   sites. The ring colour arrives as an inline custom property from
+   `PORT_COLOR_VAR`.
+   ────────────────────────────────────────────────────────────────────── */
+.react-flow .canvas-port {
+  width: 10px;
+  height: 10px;
+  min-width: 10px;
+  min-height: 10px;
+  box-sizing: border-box;
+  border-radius: var(--radius-pill);
+  border-width: 2px;
+  border-style: solid;
+  background-color: var(--color-surface);
+  transition-property: box-shadow, background-color;
+  transition-duration: var(--dur-instant);
+  transition-timing-function: var(--ease-out);
+}
+
+.react-flow .canvas-port:hover,
+.react-flow .canvas-port.connectionindicator:hover {
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-brand-500) 20%, transparent);
+}
+
+.react-flow .canvas-port.connectingfrom,
+.react-flow .canvas-port.connectingto {
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-brand-500) 28%, transparent);
+}
+
+.react-flow .canvas-port.valid {
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--color-success) 32%, transparent);
+}
+
+/* ── Edges ─────────────────────────────────────────────────────────────
+   2px bezier in ink-300, brand-500 when either endpoint is selected, and a
+   dash that flows along the wire while the downstream node is generating.
+   React Flow's own `.selected .react-flow__edge-path` rule is three classes
+   deep, so ours carries an attribute selector to outrank it.
+   ────────────────────────────────────────────────────────────────────── */
+.react-flow .react-flow__edge .canvas-edge {
+  fill: none;
+  stroke: var(--color-ink-300);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition-property: stroke;
+  transition-duration: var(--dur-fast);
+  transition-timing-function: var(--ease-out);
+}
+
+.react-flow .react-flow__edge .canvas-edge[data-active="true"] {
+  stroke: var(--color-brand-500);
+}
+
+.react-flow .react-flow__edge .canvas-edge[data-flowing="true"] {
+  stroke: var(--color-brand-500);
+  animation: var(--animate-dash);
+}
+
+/* SPEC §4.6 — the flowing dash is decoration, and decoration stops. */
+@media (prefers-reduced-motion: reduce) {
+  .react-flow .react-flow__edge .canvas-edge[data-flowing="true"] {
+    animation: none;
+  }
+}
+
+/* The wire is 2px; the thing you can grab is 20px. */
+.react-flow .react-flow__edge .canvas-edge-hit {
+  fill: none;
+  stroke: transparent;
+  stroke-width: 20;
+}
+
+/* ── Chrome React Flow draws that we do not ────────────────────────────
+   The attribution stays — the library is MIT and asks for it — but it is
+   dressed down to a hairline caption so it reads as a credit rather than as
+   product chrome.
+   ────────────────────────────────────────────────────────────────────── */
+.react-flow .react-flow__attribution {
+  background: transparent;
+  padding: 0;
+  margin: var(--spacing-2);
+}
+
+.react-flow .react-flow__attribution a {
+  color: var(--color-ink-300);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+}
+
+.react-flow .react-flow__attribution a:hover {
+  color: var(--color-ink-400);
+}

@@ -86,9 +86,35 @@ const RULES = [
     re: /style=\{\{/g,
     message:
       "Inline style needs a `// dynamic:` comment on the line above explaining the computed value.",
-    // Satisfied when the preceding two lines carry the justification.
-    ok: (lines, i) =>
-      (lines[i - 1] ?? "").includes("dynamic:") || (lines[i - 2] ?? "").includes("dynamic:"),
+    /**
+     * Satisfied when the contiguous comment block above the line carries a
+     * `dynamic:` justification. It scans the whole block rather than a fixed
+     * couple of lines, because a good reason is often longer than one line and
+     * a rule that punishes explaining yourself gets explanations deleted.
+     * JSX (`{/* … *\/}`) and line comments both count.
+     */
+    ok: (lines, i) => {
+      // Walk back over this element's own attribute lines and any comment
+      // block above it. Stops at a blank line, a closing tag, or a statement
+      // terminator, so a `dynamic:` note attached to some earlier element can
+      // never satisfy this one.
+      for (let j = i - 1; j >= 0 && j >= i - 10; j--) {
+        const above = (lines[j] ?? "").trim();
+        if (above === "" || above.includes("</") || above.endsWith(";")) return false;
+        if (above.includes("dynamic:")) return true;
+
+        const isComment =
+          above.startsWith("//") ||
+          above.startsWith("/*") ||
+          above.startsWith("*") ||
+          above.startsWith("{/*");
+        // A JSX attribute, or the element's own opening tag, keeps the walk
+        // going; anything else means we have left this element.
+        const isElementLine = above.startsWith("<") || /^[a-zA-Z-]+[=\s]/.test(above);
+        if (!isComment && !isElementLine) return false;
+      }
+      return false;
+    },
   },
 ];
 

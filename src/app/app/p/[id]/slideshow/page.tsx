@@ -1,14 +1,13 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconSlideshow } from "@/components/icons";
+import { SlideshowEditor } from "@/components/slideshow/slideshow-editor";
 
-export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Slideshow editor"
-      specSection="SPEC §8.6"
-      owner="Agent SLIDESHOW"
-      summary="A slide rail, a 9:16 layer canvas with alignment guides, and typography controls."
-      glyph={IconSlideshow}
-    />
-  );
+/**
+ * SPEC §8.6 — the slideshow editor.
+ *
+ * The route stays a thin server shell: it resolves the project id from the URL
+ * and hands off. Everything below it is a client surface, because a layer drag
+ * is not something a server component can help with.
+ */
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <SlideshowEditor projectId={id} />;
 }
