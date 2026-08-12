@@ -117,7 +117,7 @@ export function TokenMeter({ balance, usage, now, onTopUp, className }: TokenMet
 
         <hr className="my-4 border-0 border-t border-ink-200" />
 
-        <p className="eyebrow mb-3 text-ink-400">This cycle</p>
+        <p className="eyebrow mb-3 text-ink-500">This cycle</p>
         {usage === undefined ? (
           <div className="flex flex-col gap-2">
             {[0, 1, 2].map((row) => (
@@ -135,7 +135,7 @@ export function TokenMeter({ balance, usage, now, onTopUp, className }: TokenMet
                 <span className="text-body-sm min-w-0 flex-1 truncate text-ink-700">
                   {GENERATION_MODE_LABEL[entry.mode]}
                 </span>
-                <span className="mono-sm text-ink-400">{entry.count}</span>
+                <span className="mono-sm text-ink-500">{entry.count}</span>
                 <span className="mono-sm w-12 text-right text-ink-950">
                   {formatCompactNumber(entry.tokens)}
                 </span>

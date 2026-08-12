@@ -252,7 +252,7 @@ export function Composer({
               max={8}
               ariaLabel="batch count"
             />
-            <span className="mono-sm hidden text-ink-400 sm:inline">
+            <span className="mono-sm hidden text-ink-500 sm:inline">
               {formatNumber(cost)} tokens
             </span>
             <Tooltip content={reason} disabledTrigger={Boolean(reason)}>
@@ -270,7 +270,7 @@ export function Composer({
           </div>
         </div>
 
-        <p className="text-body-sm text-ink-400">{config.hint}</p>
+        <p className="text-body-sm text-ink-500">{config.hint}</p>
       </motion.div>
 
       <AssetPickerDialog

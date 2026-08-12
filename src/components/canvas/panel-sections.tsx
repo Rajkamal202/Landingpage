@@ -131,7 +131,7 @@ export function ConnectionsSection({ node }: { node: CanvasNode }) {
       {inputs.every(
         (port) => !edges.some((edge) => edge.target === node.id && edge.targetHandle === port.id),
       ) ? (
-        <p className="text-body-sm text-ink-400">
+        <p className="text-body-sm text-ink-500">
           Nothing feeds this node yet. Pick a source above, or drag a wire from another node&apos;s
           output port.
         </p>

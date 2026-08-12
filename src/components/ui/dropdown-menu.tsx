@@ -59,7 +59,7 @@ export const DropdownMenuItem = React.forwardRef<
       {glyph ? <Icon glyph={glyph} size={16} /> : null}
       <span className="flex-1 truncate">{children}</span>
       {shortcut ? (
-        <span className="mono-sm text-ink-400 group-data-[highlighted]:text-ink-500">
+        <span className="mono-sm text-ink-500 group-data-[highlighted]:text-ink-500">
           {shortcut}
         </span>
       ) : null}

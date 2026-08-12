@@ -1,14 +1,8 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconBilling } from "@/components/icons";
+import type { Metadata } from "next";
+import { BillingScreen } from "@/components/studio/settings/billing-screen";
+
+export const metadata: Metadata = { title: "Billing" };
 
 export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Billing"
-      specSection="SPEC §7.2"
-      owner="Agent STUDIO"
-      summary="Current plan, token allowance, usage this cycle and invoices."
-      glyph={IconBilling}
-    />
-  );
+  return <BillingScreen />;
 }

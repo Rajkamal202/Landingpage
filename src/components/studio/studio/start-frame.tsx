@@ -89,7 +89,7 @@ export function StartFrame({
               "transition-ui duration-(--dur-fast)",
               over
                 ? "border-brand-500 bg-brand-50 text-brand-700"
-                : "border-ink-300 bg-ink-50 text-ink-400 hover:border-ink-400 hover:text-ink-700",
+                : "border-ink-300 bg-ink-50 text-ink-500 hover:border-ink-400 hover:text-ink-700",
             )}
           >
             <Icon glyph={IconPlus} size={16} />
@@ -97,7 +97,7 @@ export function StartFrame({
         )}
       </div>
 
-      <span className="text-label w-12 text-center text-ink-400">{label.split(" ")[0]}</span>
+      <span className="text-label w-12 text-center text-ink-500">{label.split(" ")[0]}</span>
 
       <AssetPickerDialog
         open={picking}

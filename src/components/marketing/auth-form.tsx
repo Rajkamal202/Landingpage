@@ -168,7 +168,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
         </form>
 
         <p className="text-body-sm text-center text-ink-500">{copy.swap}</p>
-        <p className="text-body-sm text-center text-ink-400">
+        <p className="text-body-sm text-center text-ink-500">
           Nothing here reaches a server. This build signs you in locally so you can look around
           the studio.
         </p>

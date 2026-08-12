@@ -212,7 +212,7 @@ export function LibrarySheet({ onUse, useHint }: LibrarySheetProps) {
           >
             Open the full library
           </ButtonLink>
-          <p className="text-body-sm ml-auto text-ink-400">
+          <p className="text-body-sm ml-auto text-ink-500">
             {items.length} {items.length === 1 ? "asset" : "assets"}
           </p>
         </SheetFooter>

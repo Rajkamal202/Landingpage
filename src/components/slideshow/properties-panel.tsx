@@ -81,7 +81,7 @@ export function PropertiesPanel({
         <div className="flex items-center gap-2 border-b border-ink-200 px-3 py-3">
           <div className="min-w-0 flex-1">
             <p className="text-label truncate text-ink-950">{layer?.name ?? "No layer selected"}</p>
-            <p className="text-body-sm truncate text-ink-400">
+            <p className="text-body-sm truncate text-ink-500">
               {layer ? `${LAYER_KIND_LABEL[layer.kind]} layer` : (slide?.name ?? "No slide")}
             </p>
           </div>
@@ -136,7 +136,7 @@ export function PropertiesPanel({
           {text ? (
             <TypographyRows layer={text} onChange={onLayerChange} contentRef={contentFieldRef} />
           ) : (
-            <p className="text-body-sm text-ink-400">
+            <p className="text-body-sm text-ink-500">
               Typography applies to text layers. Select one on the canvas, or{" "}
               <button
                 type="button"

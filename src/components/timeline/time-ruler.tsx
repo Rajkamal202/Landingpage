@@ -61,7 +61,7 @@ export function TimeRuler({ width, onScrub }: TimeRulerProps) {
           // dynamic: tick position is the time it marks at the current zoom.
           style={{ transform: `translateX(${ms * pxPerMs}px)` }}
         >
-          <span className="mono-sm whitespace-nowrap pl-1 text-ink-400">
+          <span className="mono-sm whitespace-nowrap pl-1 text-ink-500">
             {formatRulerLabel(ms, ticks.step)}
           </span>
         </span>

@@ -125,7 +125,7 @@ export function DragNumberInput({
           onKeyDown={onKeyDown}
           className="mono-sm min-w-0 flex-1 bg-transparent text-ink-950 focus-visible:outline-none"
         />
-        {unit ? <span className="shrink-0 text-ink-400">{unit}</span> : null}
+        {unit ? <span className="shrink-0 text-ink-500">{unit}</span> : null}
       </div>
     );
   }
@@ -150,7 +150,7 @@ export function DragNumberInput({
       {...(disabled ? {} : handlers)}
     >
       <span className="min-w-0 flex-1 truncate">{value.toFixed(precision)}</span>
-      {unit ? <span className="shrink-0 text-ink-400">{unit}</span> : null}
+      {unit ? <span className="shrink-0 text-ink-500">{unit}</span> : null}
     </div>
   );
 }

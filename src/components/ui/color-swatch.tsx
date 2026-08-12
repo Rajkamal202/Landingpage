@@ -79,7 +79,7 @@ export function ColorSwatch({
       </PopoverTrigger>
 
       <PopoverContent align="start" className="w-auto">
-        <p className="eyebrow mb-3 text-ink-400">{label}</p>
+        <p className="eyebrow mb-3 text-ink-500">{label}</p>
         <ul className="mb-4 grid grid-cols-5 gap-2">
           {PRESETS.map((preset) => (
             <li key={preset}>

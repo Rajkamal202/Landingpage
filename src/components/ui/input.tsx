@@ -55,7 +55,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
         <Icon
           glyph={iconStart}
           size={16}
-          className={cn("text-ink-400", isInvalid && "text-danger")}
+          className={cn("text-ink-500", isInvalid && "text-danger")}
         />
       ) : null}
       <input
@@ -69,7 +69,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(function Inp
         {...field}
         {...props}
       />
-      {suffix ? <span className="text-body-sm shrink-0 text-ink-400">{suffix}</span> : null}
+      {suffix ? <span className="text-body-sm shrink-0 text-ink-500">{suffix}</span> : null}
     </div>
   );
 });

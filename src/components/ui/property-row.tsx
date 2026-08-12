@@ -59,7 +59,7 @@ export function PropertyRow({
     >
       {content}
       {hint ? (
-        <p className={cn("text-body-sm text-ink-400", layout === "inline" && "col-start-2")}>
+        <p className={cn("text-body-sm text-ink-500", layout === "inline" && "col-start-2")}>
           {hint}
         </p>
       ) : null}
@@ -103,7 +103,7 @@ export function PanelSection({
             glyph={IconChevronDown}
             size={16}
             className={cn(
-              "text-ink-400 transition-ui duration-(--dur-fast)",
+              "text-ink-500 transition-ui duration-(--dur-fast)",
               !open && "-rotate-90",
             )}
           />

@@ -36,7 +36,7 @@ export function Toaster() {
             "transition-ui duration-(--dur-instant) hover:bg-ink-100 hover:text-ink-950",
           ),
           closeButton: cn(
-            "absolute right-3 top-3 grid size-5 place-items-center rounded-sm text-ink-400",
+            "absolute right-3 top-3 grid size-5 place-items-center rounded-sm text-ink-500",
             "transition-ui duration-(--dur-instant) hover:bg-ink-100 hover:text-ink-950",
           ),
           icon: "mt-px shrink-0",

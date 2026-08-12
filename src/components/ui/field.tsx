@@ -17,7 +17,7 @@ export const Label = React.forwardRef<
       {...props}
     >
       {children}
-      {optional ? <span className="text-label text-ink-400">Optional</span> : null}
+      {optional ? <span className="text-label text-ink-500">Optional</span> : null}
     </LabelPrimitive.Root>
   );
 });

@@ -84,13 +84,13 @@ export function NewProjectCard() {
             <Icon glyph={IconPlus} size={24} />
           </span>
           <span className="text-body-md font-medium">New project</span>
-          <span className="text-body-sm max-w-measure px-4 text-center text-ink-400">
+          <span className="text-body-sm max-w-measure px-4 text-center text-ink-500">
             Start from a blank timeline, slideshow or canvas
           </span>
         </PopoverTrigger>
 
         <PopoverContent align="start" className="w-sheet p-2">
-          <p className="eyebrow px-2 pb-2 text-ink-400">Start with</p>
+          <p className="eyebrow px-2 pb-2 text-ink-500">Start with</p>
           <ul className="flex flex-col">
             {OPTIONS.map((option) => (
               <li key={option.kind}>

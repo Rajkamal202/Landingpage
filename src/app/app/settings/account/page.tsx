@@ -1,14 +1,8 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconUser } from "@/components/icons";
+import type { Metadata } from "next";
+import { AccountScreen } from "@/components/studio/settings/account-screen";
+
+export const metadata: Metadata = { title: "Account" };
 
 export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Account"
-      specSection="SPEC §7.2"
-      owner="Agent STUDIO"
-      summary="Name, email, company and password."
-      glyph={IconUser}
-    />
-  );
+  return <AccountScreen />;
 }

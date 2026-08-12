@@ -27,6 +27,12 @@ const OUTBOUND_GLYPHS: Record<string, IconDef> = {
   Contact: IconSend,
 };
 
+/**
+ * Note on the ink ramp here: this slab is `bg-ink-950`, where the ramp inverts.
+ * ink-500 measures 3.99:1 against it and fails; ink-400 measures 6.25:1 and
+ * passes. Secondary text on dark goes UP the ramp, not down — the opposite of
+ * every light surface in the product.
+ */
 export function MarketingFooter() {
   return (
     <footer className="bg-ink-950 text-white">

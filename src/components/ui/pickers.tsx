@@ -71,7 +71,7 @@ export function AspectRatioPicker({
                 >
                   <AspectGlyph aspect={aspect} />
                   <span className="mono-sm w-10">{aspect}</span>
-                  <span className="mono-sm text-ink-400">
+                  <span className="mono-sm text-ink-500">
                     {dims.width}×{dims.height}
                   </span>
                 </button>
@@ -90,7 +90,7 @@ function AspectGlyph({ aspect }: { aspect: AspectRatio }) {
   return (
     <span
       aria-hidden="true"
-      className="grid size-4 shrink-0 place-items-center text-ink-400"
+      className="grid size-4 shrink-0 place-items-center text-ink-500"
     >
       <span
         className="block border border-current"
@@ -166,7 +166,7 @@ export function ModelPicker({
         <Icon glyph={IconGenerate} size={16} className="text-ink-400" />
         <span className="truncate">{selected?.name ?? "Choose a model"}</span>
         {selected ? (
-          <span className="mono-sm ml-auto shrink-0 text-ink-400">
+          <span className="mono-sm ml-auto shrink-0 text-ink-500">
             {formatNumber(selected.tokensPerGeneration)}
           </span>
         ) : null}
@@ -180,7 +180,7 @@ export function ModelPicker({
                 <Badge tone="brand" size="sm">
                   {model.capability}
                 </Badge>
-                <span className="mono-sm ml-auto text-ink-400">
+                <span className="mono-sm ml-auto text-ink-500">
                   {formatNumber(model.tokensPerGeneration)}
                 </span>
               </span>

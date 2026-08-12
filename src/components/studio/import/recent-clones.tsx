@@ -100,7 +100,7 @@ export function RecentClones({
                   <span className="text-body-sm truncate font-medium text-ink-950">
                     {project?.name ?? clone.handle}
                   </span>
-                  <span className="mono-sm truncate text-ink-400">
+                  <span className="mono-sm truncate text-ink-500">
                     {clone.sceneCount} scenes · {formatEdited(clone.createdAt)}
                   </span>
                 </span>

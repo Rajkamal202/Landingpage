@@ -69,7 +69,7 @@ export function BulkSummaryBar({ running, onStop, onRetryFailed }: BulkSummaryBa
       <span
         className={cn(
           "grid size-8 shrink-0 place-items-center rounded-md",
-          inFlight > 0 ? "bg-brand-50 text-brand-700" : "bg-ink-100 text-ink-400",
+          inFlight > 0 ? "bg-brand-50 text-brand-700" : "bg-ink-100 text-ink-500",
         )}
       >
         <Icon glyph={IconGenerate} size={16} />
@@ -86,7 +86,7 @@ export function BulkSummaryBar({ running, onStop, onRetryFailed }: BulkSummaryBa
         />
       </div>
 
-      <span className="mono-sm shrink-0 text-ink-400">{Math.round(counts.percent)}%</span>
+      <span className="mono-sm shrink-0 text-ink-500">{Math.round(counts.percent)}%</span>
 
       {counts.failed > 0 && !running ? (
         <Button

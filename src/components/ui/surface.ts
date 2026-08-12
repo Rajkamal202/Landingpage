@@ -16,6 +16,6 @@ export const menuItem =
   "data-[state=checked]:text-ink-950 " +
   "data-[disabled]:pointer-events-none data-[disabled]:text-ink-300";
 
-export const menuLabel = "eyebrow px-2 py-2 text-ink-400";
+export const menuLabel = "eyebrow px-2 py-2 text-ink-500";
 
 export const menuSeparator = "-mx-1 my-1 h-px bg-ink-200";

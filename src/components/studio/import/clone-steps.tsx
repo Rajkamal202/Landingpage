@@ -54,7 +54,7 @@ export function CloneSteps({ progress }: { progress: CloneProgress | null }) {
                 "text-body-md transition-ui duration-(--dur-fast)",
                 done && "text-ink-500",
                 active && "font-medium text-ink-950",
-                !done && !active && "text-ink-400",
+                !done && !active && "text-ink-500",
               )}
             >
               {step.label}

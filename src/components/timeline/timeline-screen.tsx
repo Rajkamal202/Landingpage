@@ -88,7 +88,11 @@ function TimelineSkeleton() {
   // SPEC §13: skeletons, not spinners. The shape matches the real layout so
   // nothing jumps when the document arrives.
   return (
-    <div className="flex min-h-0 flex-1 flex-col">
+    // The landmark and heading exist while loading too — structure that only
+    // appears with the data is structure a screen reader user does not have
+    // while waiting for it.
+    <main className="flex min-h-0 flex-1 flex-col" aria-busy="true">
+      <h1 className="sr-only">Timeline editor</h1>
       <div className="flex h-topbar shrink-0 items-center gap-3 border-b border-ink-200 bg-surface px-3">
         <Skeleton className="h-8 w-32" />
         <Skeleton className="ml-auto h-8 w-24" />
@@ -110,6 +114,6 @@ function TimelineSkeleton() {
           ))}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

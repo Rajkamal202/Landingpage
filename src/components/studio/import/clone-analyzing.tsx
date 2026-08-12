@@ -51,12 +51,12 @@ export function CloneAnalyzing({
               <Skeleton className="absolute inset-0 rounded-none" />
             )}
           </div>
-          <p className="mono-sm mt-2 truncate text-ink-400">{sourceLabel}</p>
+          <p className="mono-sm mt-2 truncate text-ink-500">{sourceLabel}</p>
         </div>
 
         <div className="flex min-w-0 flex-1 flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <p className="eyebrow text-ink-400">Cloning video</p>
+            <p className="eyebrow text-ink-500">Cloning video</p>
             <h2 className="text-title-md text-ink-950">Taking the video apart</h2>
           </div>
           <CloneSteps progress={progress} />
@@ -68,7 +68,7 @@ export function CloneAnalyzing({
           <p className="text-body-sm text-ink-500">
             {scenes.length} of {EXPECTED_SCENES} scenes detected
           </p>
-          <p className="mono-sm text-ink-400">{Math.round(percent)}%</p>
+          <p className="mono-sm text-ink-500">{Math.round(percent)}%</p>
         </div>
 
         <SceneStrip scenes={scenes} expectedCount={EXPECTED_SCENES} />

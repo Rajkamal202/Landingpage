@@ -54,7 +54,7 @@ export const ContextMenuItem = React.forwardRef<
     >
       {glyph ? <Icon glyph={glyph} size={16} /> : null}
       <span className="flex-1 truncate">{children}</span>
-      {shortcut ? <span className="mono-sm text-ink-400">{shortcut}</span> : null}
+      {shortcut ? <span className="mono-sm text-ink-500">{shortcut}</span> : null}
     </ContextMenuPrimitive.Item>
   );
 });

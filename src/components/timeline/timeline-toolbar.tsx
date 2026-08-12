@@ -71,6 +71,10 @@ export function TimelineToolbar({ projectId, projectName, saveStatus }: Timeline
 
   return (
     <>
+      {/* The project name is this route's h1. It is visually hidden because the
+          workspace tab already shows it — but the page still needs a heading,
+          and an editor whose only heading is a tab label has none. */}
+      <h1 className="sr-only">{projectName}</h1>
       <div className="flex min-w-0 flex-1 items-center gap-2">
         <Toolbar ariaLabel="Timeline tools">
           {TOOLS.map((definition) => (
@@ -110,7 +114,7 @@ export function TimelineToolbar({ projectId, projectName, saveStatus }: Timeline
       </div>
 
       <p className="mono-sm shrink-0 text-ink-700" data-numeric>
-        <span className="text-ink-400">{aspect}</span>
+        <span className="text-ink-500">{aspect}</span>
         <span aria-hidden="true" className="px-2 text-ink-300">
           ·
         </span>
@@ -120,7 +124,7 @@ export function TimelineToolbar({ projectId, projectName, saveStatus }: Timeline
       </p>
 
       <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
-        <span className="text-body-sm hidden text-ink-400 xl:inline" aria-live="polite">
+        <span className="text-body-sm hidden text-ink-500 xl:inline" aria-live="polite">
           {SAVE_COPY[saveStatus]}
         </span>
         <Button

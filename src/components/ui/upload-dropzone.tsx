@@ -89,7 +89,7 @@ export function UploadDropzone({
         <span
           className={cn(
             "grid size-12 place-items-center rounded-lg transition-ui duration-(--dur-fast)",
-            dragging ? "bg-brand-100 text-brand-700" : "bg-surface text-ink-400 shadow-elev-1",
+            dragging ? "bg-brand-100 text-brand-700" : "bg-surface text-ink-500 shadow-elev-1",
           )}
         >
           <Icon glyph={IconUpload} size={20} />
@@ -139,7 +139,7 @@ export function UploadDropzone({
                   />
                 )}
               </span>
-              <span className="mono-sm shrink-0 text-ink-400">{formatBytes(file.size)}</span>
+              <span className="mono-sm shrink-0 text-ink-500">{formatBytes(file.size)}</span>
               {onRemove ? (
                 <IconButton
                   label={`Remove ${file.name}`}

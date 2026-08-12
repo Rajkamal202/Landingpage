@@ -12,7 +12,7 @@ const trigger = cva(
   [
     "inline-flex w-full items-center justify-between gap-2 rounded-sm border bg-surface",
     "text-ink-950 transition-ui duration-(--dur-fast)",
-    "data-[placeholder]:text-ink-400",
+    "data-[placeholder]:text-ink-500",
     "disabled:cursor-not-allowed disabled:bg-ink-50 disabled:text-ink-300",
     "touch-target",
   ],
@@ -72,11 +72,11 @@ export const SelectContent = React.forwardRef<
         )}
         {...props}
       >
-        <SelectPrimitive.ScrollUpButton className="flex h-6 items-center justify-center text-ink-400">
+        <SelectPrimitive.ScrollUpButton className="flex h-6 items-center justify-center text-ink-500">
           <Icon glyph={IconChevronUp} size={16} />
         </SelectPrimitive.ScrollUpButton>
         <SelectPrimitive.Viewport className="p-0">{children}</SelectPrimitive.Viewport>
-        <SelectPrimitive.ScrollDownButton className="flex h-6 items-center justify-center text-ink-400">
+        <SelectPrimitive.ScrollDownButton className="flex h-6 items-center justify-center text-ink-500">
           <Icon glyph={IconChevronDown} size={16} />
         </SelectPrimitive.ScrollDownButton>
       </SelectPrimitive.Content>
@@ -91,7 +91,7 @@ export const SelectItem = React.forwardRef<
   return (
     <SelectPrimitive.Item ref={ref} className={cn(menuItem, "pr-8", className)} {...props}>
       <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
-      {hint ? <span className="text-body-sm ml-auto text-ink-400">{hint}</span> : null}
+      {hint ? <span className="text-body-sm ml-auto text-ink-500">{hint}</span> : null}
       <SelectPrimitive.ItemIndicator className="absolute right-2 flex items-center">
         <Icon glyph={IconCheck} size={16} className="text-brand-500" />
       </SelectPrimitive.ItemIndicator>

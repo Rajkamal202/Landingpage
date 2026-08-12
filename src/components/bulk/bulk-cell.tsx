@@ -211,7 +211,7 @@ function ValueCellContent({
             <span className="text-body-sm truncate text-ink-700">{asset.name}</span>
           </>
         ) : (
-          <span className="text-body-sm flex items-center gap-2 text-ink-400">
+          <span className="text-body-sm flex items-center gap-2 text-ink-500">
             <Icon glyph={IconImage} size={16} />
             {isEditing ? "Choosing…" : "Choose an image"}
           </span>
@@ -225,7 +225,7 @@ function ValueCellContent({
     <span
       className={cn(
         "text-body-sm truncate",
-        text === "" ? "text-ink-400" : "text-ink-950",
+        text === "" ? "text-ink-500" : "text-ink-950",
         column.kind !== "text" && "text-ink-700",
       )}
     >

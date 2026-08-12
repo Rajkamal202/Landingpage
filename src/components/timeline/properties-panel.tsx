@@ -86,7 +86,7 @@ function MultiSelection({ clips }: { clips: readonly Clip[] }) {
           </li>
         ))}
       </ul>
-      <p className="text-body-sm text-ink-400">
+      <p className="text-body-sm text-ink-500">
         Drag any one of them to move the whole group. Properties are per clip — select one to edit
         it.
       </p>
@@ -139,7 +139,7 @@ function ProjectProperties() {
           {clipCount}
         </p>
       </PropertyRow>
-      <p className="text-body-sm text-ink-400">
+      <p className="text-body-sm text-ink-500">
         Select a clip on the timeline to edit it. Press ? for every key this screen knows.
       </p>
     </PanelSection>

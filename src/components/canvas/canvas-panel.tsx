@@ -42,7 +42,7 @@ export function CanvasPanel() {
           title="Nothing selected"
           description="Click a node to edit its model, references and prompt here."
           action={
-            <p className="text-body-sm text-ink-400">
+            <p className="text-body-sm text-ink-500">
               Double-click the canvas to add a node.
             </p>
           }

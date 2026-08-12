@@ -33,7 +33,7 @@ export function Row({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <p className="eyebrow text-ink-400">{label}</p>
+      <p className="eyebrow text-ink-500">{label}</p>
       <div
         className={cn(
           "flex flex-wrap items-center gap-4 rounded-lg border p-5",
@@ -63,7 +63,7 @@ const TYPE_STEPS = [
 export function TypeScale() {
   return (
     <div className="flex flex-col gap-3">
-      <p className="eyebrow text-ink-400">Type scale</p>
+      <p className="eyebrow text-ink-500">Type scale</p>
       <ul className="flex flex-col divide-y divide-ink-200 rounded-lg border border-ink-200 bg-surface">
         {TYPE_STEPS.map((step) => (
           <li
@@ -77,7 +77,7 @@ export function TypeScale() {
                 there is no room for a 68px sample and its specification on one
                 line, and truncating the specification would make it useless. */}
             <span className="flex items-baseline gap-4 sm:shrink-0">
-              <span className="mono-sm text-ink-400">{step.note}</span>
+              <span className="mono-sm text-ink-500">{step.note}</span>
               <span className="mono-sm text-ink-700 sm:w-24 sm:text-right">{step.token}</span>
             </span>
           </li>
@@ -132,7 +132,7 @@ const RAMPS = [
 export function ColorRamp() {
   return (
     <div className="flex flex-col gap-3">
-      <p className="eyebrow text-ink-400">Colour</p>
+      <p className="eyebrow text-ink-500">Colour</p>
       <div className="flex flex-col gap-5 rounded-lg border border-ink-200 bg-surface p-5">
         {RAMPS.map((ramp) => (
           <div key={ramp.name} className="flex flex-col gap-2">
@@ -143,7 +143,7 @@ export function ColorRamp() {
                   <span
                     className={cn("block size-12 rounded-sm border border-ink-200", className)}
                   />
-                  <span className="mono-sm text-ink-400">{token}</span>
+                  <span className="mono-sm text-ink-500">{token}</span>
                 </li>
               ))}
             </ul>
@@ -162,7 +162,7 @@ export function Elevations() {
       {ELEVATIONS.map((elevation) => (
         <div key={elevation} className="flex flex-col items-center gap-3">
           <span className={cn("block size-20 rounded-lg bg-surface", elevation)} />
-          <span className="mono-sm text-ink-400">{elevation.replace("shadow-", "")}</span>
+          <span className="mono-sm text-ink-500">{elevation.replace("shadow-", "")}</span>
         </div>
       ))}
     </div>

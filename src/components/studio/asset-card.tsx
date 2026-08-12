@@ -55,7 +55,7 @@ export function AssetCard({
       />
       <figcaption className="flex min-w-0 flex-col gap-1">
         <span className="text-body-sm truncate text-ink-950">{asset.name}</span>
-        <span className="mono-sm truncate text-ink-400">
+        <span className="mono-sm truncate text-ink-500">
           {meta ?? (
             <>
               {asset.durationMs > 0

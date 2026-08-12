@@ -156,7 +156,7 @@ function NewProjectButton() {
         <IconButton label="New project" glyph={IconPlus} size="sm" />
       </PopoverTrigger>
       <PopoverContent align="start" className="w-sheet p-2">
-        <p className="eyebrow px-2 pb-2 text-ink-400">New project</p>
+        <p className="eyebrow px-2 pb-2 text-ink-500">New project</p>
         <ul className="flex flex-col">
           {NEW_PROJECT_OPTIONS.map((option) => (
             <li key={option.kind}>

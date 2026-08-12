@@ -68,7 +68,7 @@ export function WorkspaceTabs() {
     // Hidden on narrow viewports: truncated to "No ope…" it says nothing and
     // costs the top bar a third of its width. The + button is the affordance.
     return (
-      <p className="text-body-sm hidden truncate px-2 text-ink-400 sm:block">
+      <p className="text-body-sm hidden truncate px-2 text-ink-500 sm:block">
         No open projects. Open one from the workspace to start a tab.
       </p>
     );
@@ -192,7 +192,7 @@ function TabItem({ tab, active, onSelect, onClose, onRename }: TabItemProps) {
         aria-label={`Close ${tab.name}`}
         onClick={onClose}
         className={cn(
-          "grid size-5 shrink-0 place-items-center rounded-sm text-ink-400",
+          "grid size-5 shrink-0 place-items-center rounded-sm text-ink-500",
           "transition-ui duration-(--dur-instant)",
           "hover:bg-ink-200 hover:text-ink-950",
           // Always present for keyboard and touch; revealed on hover for mouse.

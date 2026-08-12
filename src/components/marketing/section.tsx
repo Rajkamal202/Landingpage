@@ -65,12 +65,12 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <p className="eyebrow text-ink-400">{eyebrow}</p> : null}
+      {eyebrow ? <p className="eyebrow text-ink-500">{eyebrow}</p> : null}
       <Heading id={headingId} className="text-display-md lg:text-display-lg text-ink-950">
         {title}
       </Heading>
       {sub ? <p className="text-body-lg max-w-measure text-ink-500">{sub}</p> : null}
-      {note ? <p className="text-body-md max-w-measure text-ink-400">{note}</p> : null}
+      {note ? <p className="text-body-md max-w-measure text-ink-500">{note}</p> : null}
     </div>
   );
 }

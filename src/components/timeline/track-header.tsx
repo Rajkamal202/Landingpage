@@ -40,7 +40,7 @@ export function TrackHeader({ trackId }: { trackId: string }) {
           aria-hidden="true"
           className={cn("size-2 shrink-0 rounded-pill", TRACK_ACCENT[track.kind])}
         />
-        <span className={cn("text-label min-w-0 truncate", track.visible ? "text-ink-950" : "text-ink-400")}>
+        <span className={cn("text-label min-w-0 truncate", track.visible ? "text-ink-950" : "text-ink-500")}>
           {track.name}
         </span>
       </div>

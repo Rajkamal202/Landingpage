@@ -82,7 +82,7 @@ export function CommandPalette({
 
               {groups.map(([group, items]) => (
                 <CommandGroup key={group} className="pb-2">
-                  <p className="eyebrow px-2 py-2 text-ink-400">{group}</p>
+                  <p className="eyebrow px-2 py-2 text-ink-500">{group}</p>
                   {items.map((action) => (
                     <CommandItem
                       key={action.id}

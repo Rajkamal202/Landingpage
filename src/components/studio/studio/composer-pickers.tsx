@@ -44,7 +44,7 @@ export function TemplatePicker({
       </PopoverTrigger>
       <PopoverContent align="start" className="w-sheet p-2">
         <div className="flex items-center justify-between gap-2 px-2 pb-2">
-          <p className="eyebrow text-ink-400">Structure to follow</p>
+          <p className="eyebrow text-ink-500">Structure to follow</p>
           {value ? (
             <button
               type="button"
@@ -67,7 +67,7 @@ export function TemplatePicker({
                   <button type="button" className={row} onClick={() => onValueChange(template.id)}>
                     <span className="flex min-w-0 flex-1 flex-col gap-1">
                       <span className="truncate text-ink-950">{template.name}</span>
-                      <span className="mono-sm text-ink-400">
+                      <span className="mono-sm text-ink-500">
                         {TEMPLATE_CATEGORY_LABEL[template.category]} ·{" "}
                         {formatDurationShort(template.durationMs)}
                       </span>
@@ -103,7 +103,7 @@ export function ActorPicker({
       </PopoverTrigger>
       <PopoverContent align="start" className="w-sheet p-2">
         <div className="flex items-center justify-between gap-2 px-2 pb-2">
-          <p className="eyebrow text-ink-400">Who delivers it</p>
+          <p className="eyebrow text-ink-500">Who delivers it</p>
           {value ? (
             <button
               type="button"
@@ -127,7 +127,7 @@ export function ActorPicker({
                     <Avatar name={actor.name} size="sm" />
                     <span className="flex min-w-0 flex-1 flex-col gap-1">
                       <span className="truncate text-ink-950">{actor.name}</span>
-                      <span className="mono-sm truncate text-ink-400">
+                      <span className="mono-sm truncate text-ink-500">
                         {actor.styles.join(" · ")}
                       </span>
                     </span>

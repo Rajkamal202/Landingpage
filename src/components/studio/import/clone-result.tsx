@@ -37,7 +37,7 @@ export function CloneResultCard({
     <div className="flex flex-col gap-6">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex flex-col gap-1">
-          <p className="eyebrow text-ink-400">Video cloned</p>
+          <p className="eyebrow text-ink-500">Video cloned</p>
           <h2 className="text-title-lg text-ink-950">
             {result.scenes.length} scenes, ready to edit
           </h2>
@@ -67,7 +67,7 @@ export function CloneResultCard({
           </li>
         ))}
         {result.textLayers.length > 3 ? (
-          <li className="text-body-sm text-ink-400">
+          <li className="text-body-sm text-ink-500">
             and {result.textLayers.length - 3} more text layers
           </li>
         ) : null}

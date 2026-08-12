@@ -27,7 +27,7 @@ export function TrackControls() {
 
   return (
     <div className="flex h-control-lg shrink-0 items-center gap-2 border-b border-ink-200 bg-surface px-3">
-      <span className="text-label text-ink-400">Timeline</span>
+      <span className="text-label text-ink-500">Timeline</span>
 
       <span className="mono-sm text-ink-500" data-numeric>
         {formatDuration(visibleMs)} on screen

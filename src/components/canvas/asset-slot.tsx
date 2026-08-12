@@ -59,7 +59,7 @@ export function AssetSlot({ assetId, label, emptyLabel, onChange, kind }: AssetS
             ? "border-brand-500 bg-brand-50 text-brand-700"
             : asset
               ? "border-ink-200 hover:border-ink-300"
-              : "border-dashed border-ink-200 text-ink-400 hover:border-ink-300 hover:text-ink-700",
+              : "border-dashed border-ink-200 text-ink-500 hover:border-ink-300 hover:text-ink-700",
         )}
       >
         {asset ? (

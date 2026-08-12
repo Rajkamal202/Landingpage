@@ -149,7 +149,7 @@ function RelatedCard({ entry }: { entry: LandingEntry }) {
         "shadow-elev-1 transition-ui duration-(--dur-fast) hover:border-ink-300 hover:shadow-elev-2",
       )}
     >
-      <span className="eyebrow text-ink-400">{GROUP_EYEBROW[entry.group]}</span>
+      <span className="eyebrow text-ink-500">{GROUP_EYEBROW[entry.group]}</span>
       <span className="text-title-md text-ink-950">{entry.name}</span>
       <span className="text-body-md flex-1 text-ink-500">{entry.title}</span>
       <span className="text-body-sm inline-flex items-center gap-1 font-medium text-brand-600">

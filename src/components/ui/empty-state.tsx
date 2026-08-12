@@ -54,7 +54,7 @@ export function EmptyState({
         glyph ? (
           <span
             className={cn(
-              "grid place-items-center rounded-lg bg-ink-100 text-ink-400",
+              "grid place-items-center rounded-lg bg-ink-100 text-ink-500",
               s.icon,
             )}
           >

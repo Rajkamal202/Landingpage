@@ -56,7 +56,7 @@ export function Combobox({
           "border-ink-200 bg-surface px-3 text-body-md transition-ui duration-(--dur-fast)",
           "hover:border-ink-300",
           "disabled:cursor-not-allowed disabled:bg-ink-50 disabled:text-ink-300",
-          selected ? "text-ink-950" : "text-ink-400",
+          selected ? "text-ink-950" : "text-ink-500",
           className,
         )}
       >
@@ -91,7 +91,7 @@ export function Combobox({
                 >
                   <span className="min-w-0 flex-1 truncate">{option.label}</span>
                   {option.hint ? (
-                    <span className="mono-sm text-ink-400">{option.hint}</span>
+                    <span className="mono-sm text-ink-500">{option.hint}</span>
                   ) : null}
                   {option.value === value ? (
                     <Icon glyph={IconCheck} size={16} className="text-brand-500" />

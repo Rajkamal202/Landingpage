@@ -47,7 +47,7 @@ export function CloneFailureCard({
         <div className="flex min-w-0 flex-col gap-2">
           <h2 className="text-title-md text-ink-950">{title}</h2>
           <p className="text-body-md text-ink-500">{fix}</p>
-          <p className="mono-sm truncate text-ink-400">{sourceLabel}</p>
+          <p className="mono-sm truncate text-ink-500">{sourceLabel}</p>
         </div>
       </div>
 

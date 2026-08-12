@@ -63,7 +63,7 @@ export function SourceBody({ node }: { node: NodeOf<"source"> }) {
           className={cn(
             "text-body-sm flex h-32 items-center justify-center rounded-md border border-dashed",
             "px-3 text-center transition-ui duration-(--dur-fast)",
-            over ? "border-brand-500 bg-brand-50 text-brand-700" : "border-ink-200 text-ink-400",
+            over ? "border-brand-500 bg-brand-50 text-brand-700" : "border-ink-200 text-ink-500",
           )}
         >
           Drop a library asset here, or choose one below.
@@ -96,7 +96,7 @@ export function PromptBody({ node }: { node: NodeOf<"prompt"> }) {
 
   if (node.text.length === 0) {
     return (
-      <p className="text-body-sm text-ink-400">
+      <p className="text-body-sm text-ink-500">
         No prompt yet. Write one in the properties panel — type @ to reference a library asset.
       </p>
     );
@@ -135,7 +135,7 @@ export function ImageGenBody({ node }: { node: NodeOf<"image-gen"> }) {
         {output ? <AssetThumb asset={output} draggable={false} className="h-32 w-full" /> : null}
       </ResultFrame>
       <div className="flex items-center justify-between gap-2">
-        <span className="mono-sm truncate text-ink-400">
+        <span className="mono-sm truncate text-ink-500">
           {node.size} · {model?.name ?? "No model chosen"}
         </span>
         <Badge tone={references > 0 ? "brand" : "neutral"} size="sm">
@@ -172,7 +172,7 @@ export function VideoGenBody({ node }: { node: NodeOf<"video-gen"> }) {
           />
         ) : null}
       </ResultFrame>
-      <span className="mono-sm truncate text-ink-400">
+      <span className="mono-sm truncate text-ink-500">
         {formatDurationShort(node.durationMs)} · {node.aspect} · {model?.name ?? "No model chosen"}
       </span>
     </>
@@ -199,7 +199,7 @@ export function VoiceBody({ node }: { node: NodeOf<"voice"> }) {
           </div>
         ) : null}
       </ResultFrame>
-      <span className="mono-sm truncate text-ink-400">
+      <span className="mono-sm truncate text-ink-500">
         {actor?.name ?? "No actor chosen"} · {node.speed.toFixed(2)}× speed
       </span>
       {node.script.length > 0 ? (

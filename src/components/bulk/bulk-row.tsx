@@ -71,7 +71,7 @@ export const BulkRow = React.memo(function BulkRow({
             className={cn(
               "mono-sm sticky left-0 z-(--z-sticky) flex shrink-0 items-center justify-center",
               "border-b border-r border-ink-200 transition-ui duration-(--dur-instant)",
-              inSelection ? "bg-brand-50 text-brand-700" : "bg-ink-50 text-ink-400",
+              inSelection ? "bg-brand-50 text-brand-700" : "bg-ink-50 text-ink-500",
             )}
             // dynamic: the row-number gutter width, shared with the header.
             style={{ width: GUTTER_WIDTH }}

@@ -92,10 +92,13 @@ export function SegmentedControl<T extends string>({
               "transition-ui duration-(--dur-instant) focus-visible:ring-focus-inset",
               size === "sm" ? "h-control-sm px-3 text-body-sm" : "h-control-md px-4 text-body-sm",
               "disabled:pointer-events-none disabled:opacity-40",
+              // ink-700, not ink-500: the light track is `bg-ink-100`, where
+              // ink-500 measures 4.34:1 — under the 4.5:1 bar. ink-500 is only
+              // safe for secondary text on white or ink-50.
               tone === "light"
                 ? selected
                   ? "text-ink-950"
-                  : "text-ink-500 hover:text-ink-950"
+                  : "text-ink-700 hover:text-ink-950"
                 : selected
                   ? "text-ink-950"
                   : "text-white/70 hover:text-white",

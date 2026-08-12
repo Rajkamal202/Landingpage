@@ -1,14 +1,18 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconTemplate } from "@/components/icons";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { PageFallback } from "@/components/studio/page-fallback";
+import { TemplatesScreen } from "@/components/studio/templates/templates-screen";
 
+export const metadata: Metadata = { title: "Templates" };
+
+const DESCRIPTION =
+  "Formats that already work, broken down so you can see the structure before you commit.";
+
+/** SPEC §8.3. Filters and the open template live in search params. */
 export default function Page() {
   return (
-    <RoutePlaceholder
-      title="Templates"
-      specSection="SPEC §8.3"
-      owner="Agent STUDIO"
-      summary="Filterable formats with hover previews and a structural breakdown before you commit."
-      glyph={IconTemplate}
-    />
+    <Suspense fallback={<PageFallback title="Templates" description={DESCRIPTION} tiles={10} />}>
+      <TemplatesScreen />
+    </Suspense>
   );
 }

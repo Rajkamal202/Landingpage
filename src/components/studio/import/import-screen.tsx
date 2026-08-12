@@ -226,7 +226,7 @@ export function ImportScreen() {
                       <Button type="submit" size="lg" variant="primary">
                         Clone video
                       </Button>
-                      <span className="text-body-sm text-ink-400">or</span>
+                      <span className="text-body-sm text-ink-500">or</span>
                       <UploadTrigger
                         label="Upload a file"
                         onFiles={(files) => {
@@ -237,7 +237,7 @@ export function ImportScreen() {
                     </div>
                   </form>
 
-                  <p className="text-body-sm text-ink-400">
+                  <p className="text-body-sm text-ink-500">
                     TikTok, Instagram, YouTube Shorts and Meta Ads links all work.
                   </p>
                 </motion.div>

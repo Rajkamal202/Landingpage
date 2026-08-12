@@ -104,7 +104,9 @@ export const TabsTrigger = React.forwardRef<
         "disabled:pointer-events-none disabled:text-ink-300",
         variant === "line"
           ? "-mb-px h-10 text-ink-500 hover:text-ink-950 data-[state=active]:text-ink-950"
-          : "h-8 rounded-sm px-3 text-ink-500 hover:text-ink-950 data-[state=active]:text-ink-950",
+          // The pill variant's track is `bg-ink-100`, where ink-500 measures
+          // 4.34:1. The line variant sits on the page, where it passes.
+          : "h-8 rounded-sm px-3 text-ink-700 hover:text-ink-950 data-[state=active]:text-ink-950",
         className,
       )}
       {...props}

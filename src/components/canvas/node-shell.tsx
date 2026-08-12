@@ -128,7 +128,7 @@ export function ResultFrame({
     <p
       className={cn(
         "text-body-sm flex h-32 items-center justify-center rounded-md border border-dashed",
-        "border-ink-200 px-3 text-center text-ink-400",
+        "border-ink-200 px-3 text-center text-ink-500",
       )}
     >
       {empty}

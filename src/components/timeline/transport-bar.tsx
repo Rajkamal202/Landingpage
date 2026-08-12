@@ -109,7 +109,7 @@ export function TransportBar({ fullscreen, onToggleFullscreen, className }: Tran
         <span aria-hidden="true" className="text-ink-300">
           /
         </span>
-        <span className="text-ink-400">{formatTimecode(durationMs, fps)}</span>
+        <span className="text-ink-500">{formatTimecode(durationMs, fps)}</span>
       </p>
 
       {shuttling ? (

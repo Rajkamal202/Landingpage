@@ -42,7 +42,7 @@ export function ShortcutsDialog() {
           <div className="grid gap-6 sm:grid-cols-2">
             {groups.map((group) => (
               <section key={group.group} className="flex flex-col gap-3">
-                <h3 className="eyebrow text-ink-400">{group.group}</h3>
+                <h3 className="eyebrow text-ink-500">{group.group}</h3>
                 <ul className="flex flex-col gap-2">
                   {group.items.map((item) => (
                     <li key={item.id} className="flex items-center justify-between gap-4">

@@ -99,7 +99,7 @@ export function ProjectCard({
           onClick={() => onOpen()}
           className={cn(
             "flex aspect-9/16 w-full flex-col items-center justify-center gap-2 rounded-md",
-            "border border-dashed border-ink-300 bg-ink-100 text-ink-400",
+            "border border-dashed border-ink-300 bg-ink-100 text-ink-500",
             "transition-ui duration-(--dur-fast) hover:border-ink-400 hover:bg-ink-200",
           )}
         >

@@ -1,14 +1,21 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconFolder } from "@/components/icons";
+import type { Metadata } from "next";
+import { Suspense } from "react";
+import { LibraryScreen } from "@/components/studio/library/library-screen";
+import { PageFallback } from "@/components/studio/page-fallback";
 
+export const metadata: Metadata = { title: "Library" };
+
+const DESCRIPTION =
+  "Every clip, still and audio bed on the account. Drag one straight into an editor, or open it for a closer look.";
+
+/**
+ * SPEC §7.2. Filters, sort, search and the open asset all live in search
+ * params, so the Suspense boundary is what keeps this route prerenderable.
+ */
 export default function Page() {
   return (
-    <RoutePlaceholder
-      title="Library"
-      specSection="SPEC §8.2"
-      owner="Agent STUDIO"
-      summary="Every asset in the account, filterable by type and source, draggable into any editor."
-      glyph={IconFolder}
-    />
+    <Suspense fallback={<PageFallback title="Library" description={DESCRIPTION} tiles={12} />}>
+      <LibraryScreen />
+    </Suspense>
   );
 }

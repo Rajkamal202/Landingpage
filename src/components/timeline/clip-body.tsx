@@ -94,7 +94,7 @@ function Placeholder({ label, glyph = "image" }: { label: string; glyph?: "image
       <Icon
         glyph={glyph === "audio" ? IconAudio : IconImage}
         size={16}
-        className="shrink-0 text-ink-400"
+        className="shrink-0 text-ink-500"
       />
       <span className="text-body-sm min-w-0 truncate text-ink-500">{label}</span>
     </div>

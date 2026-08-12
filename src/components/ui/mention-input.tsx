@@ -215,12 +215,12 @@ export function MentionInput({
                     className="size-8 shrink-0 rounded-sm object-cover"
                   />
                 ) : (
-                  <span className="grid size-8 shrink-0 place-items-center rounded-sm bg-ink-100 text-ink-400">
+                  <span className="grid size-8 shrink-0 place-items-center rounded-sm bg-ink-100 text-ink-500">
                     <Icon glyph={KIND_ICON[option.kind]} size={16} />
                   </span>
                 )}
                 <span className="min-w-0 flex-1 truncate">{option.label}</span>
-                <span className="mono-sm text-ink-400">@{option.label}</span>
+                <span className="mono-sm text-ink-500">@{option.label}</span>
               </button>
             </li>
           ))}

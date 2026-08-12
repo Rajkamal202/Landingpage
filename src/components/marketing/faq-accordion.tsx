@@ -65,7 +65,7 @@ export function FaqAccordion({
                   glyph={IconChevronDown}
                   size={20}
                   className={cn(
-                    "mt-1 shrink-0 text-ink-400 transition-ui duration-(--dur-fast)",
+                    "mt-1 shrink-0 text-ink-500 transition-ui duration-(--dur-fast)",
                     isOpen && "rotate-180",
                   )}
                 />

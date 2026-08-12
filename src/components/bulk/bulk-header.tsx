@@ -131,7 +131,7 @@ export function BulkHeader({ headers, columnsById, onMoveColumn, onResetWidth }:
                 <Icon
                   glyph={IconChevronDown}
                   size={16}
-                  className="shrink-0 text-ink-400 opacity-0 group-hover:opacity-100 data-[state=open]:opacity-100"
+                  className="shrink-0 text-ink-500 opacity-0 group-hover:opacity-100 data-[state=open]:opacity-100"
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="start">

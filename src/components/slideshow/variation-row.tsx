@@ -49,8 +49,8 @@ export function VariationRow({
       className="shrink-0 border-t border-ink-200 bg-surface px-3 py-3"
     >
       <div className="mb-2 flex items-center gap-2">
-        <h2 className="eyebrow text-ink-400">Variations</h2>
-        <span className="mono-sm text-ink-400">{entries.length}</span>
+        <h2 className="eyebrow text-ink-500">Variations</h2>
+        <span className="mono-sm text-ink-500">{entries.length}</span>
       </div>
 
       <ScrollArea orientation="horizontal" fadeEdges>
@@ -82,12 +82,12 @@ export function VariationRow({
                       />
                     ))}
                     {entry.slides.length === 0 ? (
-                      <span className="text-body-sm text-ink-400">No slides yet</span>
+                      <span className="text-body-sm text-ink-500">No slides yet</span>
                     ) : null}
                   </span>
                   <span className="min-w-0">
                     <span className="text-label block truncate text-ink-950">{entry.name}</span>
-                    <span className="mono-sm block text-ink-400">
+                    <span className="mono-sm block text-ink-500">
                       {entry.slides.length} {entry.slides.length === 1 ? "slide" : "slides"}
                     </span>
                   </span>

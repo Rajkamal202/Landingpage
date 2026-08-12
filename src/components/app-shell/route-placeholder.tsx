@@ -35,14 +35,14 @@ export function RoutePlaceholder({
         className,
       )}
     >
-      <span className="grid size-12 place-items-center rounded-lg bg-ink-100 text-ink-400">
+      <span className="grid size-12 place-items-center rounded-lg bg-ink-100 text-ink-500">
         <Icon glyph={glyph} size={24} />
       </span>
       <div className="flex max-w-measure flex-col gap-2">
         <h1 className="text-title-lg text-ink-950">{title}</h1>
         <p className="text-body-md text-ink-500">{summary}</p>
       </div>
-      <p className="mono-sm text-ink-400">
+      <p className="mono-sm text-ink-500">
         {specSection} · {owner}
       </p>
     </div>

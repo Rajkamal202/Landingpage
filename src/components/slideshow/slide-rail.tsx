@@ -65,7 +65,7 @@ export function SlideRail({
   return (
     <div className="flex w-rail shrink-0 flex-col border-r border-ink-200 bg-surface">
       <div className="flex flex-col gap-1 border-b border-ink-200 px-3 py-3">
-        <p className="eyebrow text-ink-400">Slides</p>
+        <p className="eyebrow text-ink-500">Slides</p>
         <p className="mono-sm text-ink-700">
           {slides.length === 0 ? "None yet" : `${activeIndex + 1} / ${slides.length}`}
         </p>

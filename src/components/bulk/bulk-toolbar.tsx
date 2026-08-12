@@ -144,7 +144,7 @@ export function BulkToolbar({
         onClick={() => useBulkStore.getState().redo()}
       />
 
-      <span className="mono-sm ml-auto shrink-0 text-ink-400">
+      <span className="mono-sm ml-auto shrink-0 text-ink-500">
         {formatNumber(rowCount)} {rowCount === 1 ? "variation" : "variations"}
       </span>
 

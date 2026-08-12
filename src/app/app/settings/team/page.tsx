@@ -1,14 +1,8 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconTeam } from "@/components/icons";
+import type { Metadata } from "next";
+import { TeamScreen } from "@/components/studio/settings/team-screen";
+
+export const metadata: Metadata = { title: "Team" };
 
 export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Team"
-      specSection="SPEC §7.2"
-      owner="Agent STUDIO"
-      summary="Members, roles and pending invitations."
-      glyph={IconTeam}
-    />
-  );
+  return <TeamScreen />;
 }
