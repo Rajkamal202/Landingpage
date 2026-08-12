@@ -27,8 +27,14 @@ for (const route of ALL_ROUTES) {
         if (el.closest("nextjs-portal")) return "__overlay__";
         const rect = el.getBoundingClientRect();
         const style = getComputedStyle(el);
+        // Position is part of the identity: two adjacent inputs can serialise
+        // identically by tag and label while being genuinely different tab
+        // stops, and comparing only the visible attributes reports a trap that
+        // is not there.
         return JSON.stringify({
           tag: el.tagName.toLowerCase(),
+          x: Math.round(rect.x),
+          y: Math.round(rect.y),
           label:
             el.getAttribute("aria-label") ?? el.textContent?.trim().slice(0, 30) ?? el.id ?? "",
           visible:
@@ -70,8 +76,12 @@ test.describe("shortcuts dialog", () => {
       await page.locator("body").click({ position: { x: 5, y: 200 } });
       await page.keyboard.press("?");
 
-      // SPEC §11 requires the dialog to document keyboard equivalents.
-      await expect(page.getByRole("dialog").getByText("Keyboard shortcuts")).toBeVisible();
+      // Match the dialog's own heading, not any text containing the phrase —
+      // the shortcut list itself contains a row labelled "Show keyboard
+      // shortcuts", which makes a plain text match ambiguous.
+      await expect(
+        page.getByRole("dialog").getByRole("heading", { name: "Keyboard shortcuts" }),
+      ).toBeVisible();
       await page.keyboard.press("Escape");
     });
   }

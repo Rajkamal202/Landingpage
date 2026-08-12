@@ -95,7 +95,7 @@ export function PlanDialog({ open, onOpenChange, plans, currentPlanId }: PlanDia
               ]}
             />
 
-            <ul className="mt-4 grid gap-3 sm:grid-cols-3">
+            <ul className="palette-list mt-4 grid gap-3 overflow-y-auto sm:grid-cols-3">
               {plans.map((plan) => {
                 const current = plan.id === currentPlanId;
                 return (

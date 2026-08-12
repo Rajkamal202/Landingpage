@@ -90,8 +90,6 @@ export function BrandForm({
 
   const submit = form.handleSubmit((values) => save.mutate(toBrandKit(kit, values)));
 
-  const logoId = form.watch("logoAssetId");
-
   return (
     <FormProvider {...form}>
       <form onSubmit={(event) => void submit(event)} noValidate className="flex flex-col gap-6">
@@ -109,7 +107,7 @@ export function BrandForm({
               name="logoAssetId"
               render={({ field }) => (
                 <LogoField
-                  logo={logoId ? assetById.get(logoId) : undefined}
+                  logo={field.value ? assetById.get(field.value) : undefined}
                   onChange={(next) => field.onChange(next)}
                 />
               )}

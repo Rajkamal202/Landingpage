@@ -7,6 +7,7 @@ import { cn } from "@/lib/cn";
 import { Icon } from "@/components/icon";
 import { IconCheck, IconChevronDown, IconChevronUp, IconChevronsUpDown } from "@/components/icons";
 import { menuItem, menuLabel, menuSeparator, popSurface } from "./surface";
+import { useFieldControl } from "./field";
 
 const trigger = cva(
   [
@@ -37,10 +38,18 @@ export const SelectTrigger = React.forwardRef<
   React.ComponentRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger> & VariantProps<typeof trigger>
 >(function SelectTrigger({ className, size, invalid, children, ...props }, ref) {
+  // Composes with <Field>: without this the field's label carries an htmlFor
+  // pointing at an id nothing owns, so clicking the label does nothing and the
+  // trigger has no accessible description. Filters that use a bare trigger are
+  // unaffected — useFieldControl returns an empty object outside a Field.
+  const field = useFieldControl();
+  const isInvalid = invalid ?? Boolean(field["aria-invalid"]);
+
   return (
     <SelectPrimitive.Trigger
       ref={ref}
-      className={cn(trigger({ size, invalid }), className)}
+      className={cn(trigger({ size, invalid: isInvalid }), className)}
+      {...field}
       {...props}
     >
       <span className="flex min-w-0 items-center gap-2 truncate">{children}</span>

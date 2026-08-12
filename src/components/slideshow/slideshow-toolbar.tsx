@@ -9,6 +9,7 @@ import {
   Select,
   SelectContent,
   SelectItem,
+  SelectGroup,
   SelectLabel,
   SelectTrigger,
 } from "@/components/ui/select";
@@ -91,16 +92,20 @@ export function SlideshowToolbar({
         </SelectTrigger>
 
         <SelectContent>
-          <SelectLabel>Variations of {templateName}</SelectLabel>
-          {variations.map((variation) => (
-            <SelectItem
-              key={variation.id ?? BASE_VARIATION_VALUE}
-              value={variation.id ?? BASE_VARIATION_VALUE}
-              hint={`${variation.slideCount} ${variation.slideCount === 1 ? "slide" : "slides"}`}
-            >
-              {variation.name}
-            </SelectItem>
-          ))}
+          {/* Radix requires SelectLabel to sit inside a SelectGroup; outside
+              one it throws and takes the whole route down with it. */}
+          <SelectGroup>
+            <SelectLabel>Variations of {templateName}</SelectLabel>
+            {variations.map((variation) => (
+              <SelectItem
+                key={variation.id ?? BASE_VARIATION_VALUE}
+                value={variation.id ?? BASE_VARIATION_VALUE}
+                hint={`${variation.slideCount} ${variation.slideCount === 1 ? "slide" : "slides"}`}
+              >
+                {variation.name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
         </SelectContent>
       </Select>
 

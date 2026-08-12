@@ -26,6 +26,13 @@ export interface FilterSelectProps<T extends string> {
   label: string;
   /** What the unfiltered state is called — "All types", "Any language". */
   anyLabel: string;
+  /**
+   * The value the `anyLabel` row stands for. Defaults to the `ANY` sentinel,
+   * which is right for a filter — but a *sort* always has a real default, and
+   * passing `anyValue="recent"` lets this render "Recently edited" as the
+   * default row instead of leaving the trigger blank because no item matched.
+   */
+  anyValue?: T | typeof ANY;
   value: T;
   onValueChange: (value: T) => void;
   options: readonly FilterOption<T>[];
@@ -35,6 +42,7 @@ export interface FilterSelectProps<T extends string> {
 export function FilterSelect<T extends string>({
   label,
   anyLabel,
+  anyValue = ANY,
   value,
   onValueChange,
   options,
@@ -45,12 +53,12 @@ export function FilterSelect<T extends string>({
       <SelectTrigger
         size="sm"
         aria-label={label}
-        className={cn(value === ANY ? "text-ink-500" : "text-ink-950", className)}
+        className={cn(value === anyValue ? "text-ink-500" : "text-ink-950", className)}
       >
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value={ANY}>{anyLabel}</SelectItem>
+        <SelectItem value={anyValue}>{anyLabel}</SelectItem>
         {options.map((option) => (
           <SelectItem key={option.value} value={option.value}>
             {option.label}

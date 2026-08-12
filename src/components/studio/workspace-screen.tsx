@@ -103,6 +103,7 @@ export function WorkspaceScreen() {
           <FilterSelect
             label="Sort projects"
             anyLabel="Recently edited"
+            anyValue="recent"
             value={sort}
             onValueChange={setSort}
             options={SORT_OPTIONS.filter((option) => option.value !== "recent")}

@@ -156,7 +156,9 @@ export function TemplatesScreen() {
       toast.success("Template used", {
         description: `${template.name} is open in the timeline, ready for your product and script.`,
       });
-      setOpenId("");
+      // `?template=` is left in place deliberately: coming back lands on the
+      // browser with this template still open, which is what URL-as-state is
+      // for (SPEC §10).
       openProject(project);
     },
     onError: (_error, template) => {

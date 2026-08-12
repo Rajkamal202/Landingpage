@@ -119,9 +119,9 @@ export function TeamScreen() {
         description: `${member.name} no longer has access to this workspace.`,
       });
     },
-    onSettled: () => {
-      void queryClient.invalidateQueries({ queryKey: queryKeys.billing.team });
-    },
+    // Deliberately no invalidation on settle. The optimistic list already
+    // matches what the API layer holds, and a refetch here would also discard
+    // the role changes below, which have nowhere to persist to yet.
   });
 
   const changeRole = (member: TeamMember, role: Role) => {
@@ -132,6 +132,11 @@ export function TeamScreen() {
   };
 
   const members = team.data ?? [];
+
+  // The empty state's action has to land somewhere real, so it sends focus to
+  // the invite field rather than merely scrolling the page.
+  const emailRef = React.useRef<HTMLInputElement | null>(null);
+  const emailField = register("email");
 
   return (
     <SettingsSection
@@ -166,8 +171,8 @@ export function TeamScreen() {
             title="You're the only one here"
             description="Invite the people who write, edit or approve the work and they'll see every project in this workspace."
             action={
-              <Button variant="primary" size="sm" onClick={() => reset({ email: "", role: "editor" })}>
-                Start an invite
+              <Button variant="primary" size="sm" onClick={() => emailRef.current?.focus()}>
+                Invite a teammate
               </Button>
             }
           />
@@ -249,7 +254,11 @@ export function TeamScreen() {
               type="email"
               autoComplete="off"
               placeholder="teammate@company.com"
-              {...register("email")}
+              {...emailField}
+              ref={(node) => {
+                emailField.ref(node);
+                emailRef.current = node;
+              }}
             />
           </Field>
 

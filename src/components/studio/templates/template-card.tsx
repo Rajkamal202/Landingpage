@@ -107,7 +107,7 @@ export function TemplateCard({ template, preview, onOpen }: TemplateCardProps) {
         <div className="flex flex-wrap items-center gap-2">
           <Badge tone="neutral">{TEMPLATE_CATEGORY_LABEL[template.category]}</Badge>
           <Badge tone="outline">{PACING_LABEL[template.pacing]}</Badge>
-          <span className="mono-sm text-ink-400" data-numeric>
+          <span className="mono-sm text-ink-500" data-numeric>
             {template.sceneCount} scenes · {template.aspect}
           </span>
         </div>
