@@ -87,7 +87,7 @@ export function VariationRow({
                   </span>
                   <span className="min-w-0">
                     <span className="text-label block truncate text-ink-950">{entry.name}</span>
-                    <span className="mono-sm block text-ink-500">
+                    <span className="mono-sm block text-ink-700">
                       {entry.slides.length} {entry.slides.length === 1 ? "slide" : "slides"}
                     </span>
                   </span>

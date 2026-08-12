@@ -61,10 +61,25 @@ test.describe("transition discipline", () => {
 
       const offenders = await page.evaluate(() => {
         const bad: string[] = [];
+        const toMs = (value: string) =>
+          value
+            .split(",")
+            .map((part) => {
+              const trimmed = part.trim();
+              if (trimmed.endsWith("ms")) return Number.parseFloat(trimmed);
+              if (trimmed.endsWith("s")) return Number.parseFloat(trimmed) * 1000;
+              return 0;
+            })
+            .reduce((max, current) => Math.max(max, current), 0);
+
         for (const el of document.body.querySelectorAll<HTMLElement>("*")) {
           if (el.closest("nextjs-portal")) continue;
-          const property = getComputedStyle(el).transitionProperty;
-          if (property === "all") {
+          const style = getComputedStyle(el);
+          // `transition-property` INITIALISES to `all` in CSS, so testing it
+          // alone flags every element that has no transition whatsoever. Only a
+          // non-zero duration makes it an actual animating `all`.
+          const property = style.transitionProperty;
+          if (property === "all" && toMs(style.transitionDuration) > 0) {
             const cls = typeof el.className === "string" ? el.className.slice(0, 60) : "";
             bad.push(`${el.tagName.toLowerCase()}.${cls}`);
           }

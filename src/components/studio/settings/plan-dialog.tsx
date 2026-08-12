@@ -112,13 +112,13 @@ export function PlanDialog({ open, onOpenChange, plans, currentPlanId }: PlanDia
                       {plan.popular && !current ? <Badge tone="brand">Popular</Badge> : null}
                     </div>
 
-                    <p className="text-body-sm text-ink-500">{plan.description}</p>
+                    <p className="text-body-sm text-ink-700">{plan.description}</p>
 
                     <p className="mono-sm text-ink-950" data-numeric>
                       {priceLine(plan, period)}
                     </p>
 
-                    <p className="mono-sm text-ink-500" data-numeric>
+                    <p className="mono-sm text-ink-700" data-numeric>
                       {plan.tokensPerMonth === null
                         ? "Custom token allocation"
                         : `${formatNumber(plan.tokensPerMonth)} tokens / month`}

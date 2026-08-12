@@ -142,7 +142,7 @@ export function PropertiesPanel({
                 type="button"
                 onClick={onAddText}
                 className={cn(
-                  "rounded-sm font-medium text-brand-500 underline underline-offset-2",
+                  "rounded-sm font-medium text-brand-600 underline underline-offset-2",
                   "transition-ui duration-(--dur-instant) hover:text-brand-600",
                 )}
               >

@@ -57,13 +57,13 @@ export function SettingsFrame({ children }: { children: React.ReactNode }) {
                       "transition-ui duration-(--dur-instant)",
                       active
                         ? "bg-ink-100 text-ink-950"
-                        : "text-ink-500 hover:bg-ink-100 hover:text-ink-950",
+                        : "text-ink-700 hover:bg-ink-100 hover:text-ink-950",
                     )}
                   >
                     <Icon glyph={link.glyph} size={16} />
                     <span className="flex flex-col">
                       <span className="text-body-sm font-medium">{link.label}</span>
-                      <span className="text-body-sm hidden text-ink-500 lg:block">
+                      <span className="text-body-sm hidden text-ink-700 lg:block">
                         {link.description}
                       </span>
                     </span>

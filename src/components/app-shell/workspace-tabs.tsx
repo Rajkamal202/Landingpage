@@ -80,9 +80,13 @@ export function WorkspaceTabs() {
       axis="x"
       values={tabs}
       onReorder={reorderTabs}
-      role="tablist"
+      role="navigation"
+      // Not a tablist. ARIA's tablist controls tabpanels in the same document;
+      // these navigate to different routes, so the accurate model is a
+      // navigation list with aria-current on the open one. It also happens to
+      // satisfy aria-required-children, which a tablist wrapping Reorder.Item
+      // divs cannot.
       aria-label="Open projects"
-      aria-orientation="horizontal"
       className="flex min-w-0 items-center gap-1"
     >
       {tabs.map((tab) => (
@@ -160,8 +164,7 @@ function TabItem({ tab, active, onSelect, onClose, onRename }: TabItemProps) {
       ) : (
         <button
           type="button"
-          role="tab"
-          aria-selected={active}
+          aria-current={active ? "page" : undefined}
           onClick={onSelect}
           onDoubleClick={() => setEditing(true)}
           onPointerDown={(event) => {

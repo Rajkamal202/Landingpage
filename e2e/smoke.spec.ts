@@ -95,11 +95,11 @@ test("opening a project adds a workspace tab that survives reload", async ({ pag
   await page.goto(`/app/p/${PROJECT_ID}/studio`);
   await page.waitForLoadState("networkidle");
 
-  const tablist = page.getByRole("tablist", { name: /open projects/i });
-  await expect(tablist).toBeVisible();
+  const tabs = page.getByRole("navigation", { name: /open projects/i });
+  await expect(tabs).toBeVisible();
 
   await page.reload();
-  await expect(page.getByRole("tablist", { name: /open projects/i })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: /open projects/i })).toBeVisible();
 });
 
 test("bulk grid pastes TSV from an external spreadsheet", async ({ page, context }) => {

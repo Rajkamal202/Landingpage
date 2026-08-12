@@ -12,7 +12,7 @@ const badge = cva(
         neutral: "bg-ink-100 text-ink-700",
         brand: "bg-brand-50 text-brand-700",
         success: "bg-success/10 text-success-600",
-        warning: "bg-warning/10 text-warning",
+        warning: "bg-warning/10 text-warning-700",
         danger: "bg-danger/10 text-danger",
         /** On dark surfaces — pricing "Popular", enterprise "Concierge". */
         inverse: "bg-white/12 text-white",

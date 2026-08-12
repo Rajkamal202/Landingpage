@@ -16,6 +16,10 @@ export const Slider = React.forwardRef<
   SliderProps
 >(function Slider({ className, showValue = false, formatValue, ...props }, ref) {
   const values = props.value ?? props.defaultValue ?? [0];
+  // Radix puts the slider role on the THUMB, not the root, so a name set on
+  // the root never reaches the control axe is inspecting. Forward it, and give
+  // each thumb an ordinal when there is more than one.
+  const rootLabel = props["aria-label"];
 
   return (
     <SliderPrimitive.Root
@@ -29,6 +33,13 @@ export const Slider = React.forwardRef<
       {values.map((value, i) => (
         <SliderPrimitive.Thumb
           key={i}
+          aria-label={
+            rootLabel === undefined
+              ? undefined
+              : values.length > 1
+                ? `${rootLabel}, handle ${i + 1}`
+                : rootLabel
+          }
           className={cn(
             "relative block size-4 rounded-pill border border-ink-300 bg-white shadow-elev-1",
             "transition-ui duration-(--dur-instant)",

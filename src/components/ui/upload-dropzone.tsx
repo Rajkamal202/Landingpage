@@ -107,6 +107,8 @@ export function UploadDropzone({
         type="file"
         accept={accept}
         multiple={multiple}
+        aria-label="Choose files to upload"
+        tabIndex={-1}
         className="sr-only"
         onChange={(event) => {
           accept_(event.target.files);
@@ -184,6 +186,10 @@ export function UploadTrigger({
         type="file"
         multiple
         accept="video/*,image/*"
+        aria-label={label}
+        // The visible button is the tab stop; this input only exists to open
+        // the file dialog, so it must not be a second one.
+        tabIndex={-1}
         className="sr-only"
         onChange={(event) => {
           onFiles(Array.from(event.target.files ?? []));

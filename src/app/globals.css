@@ -67,6 +67,9 @@
      a real token. Both keep white text above 4.5:1. */
   --color-danger-600: #b02a23;
   --color-success-600: #127757;
+  /* Text sitting on the 10% warning tint. The base --color-warning measures
+     3.35:1 against its own tint and fails; this reads 6.35:1. */
+  --color-warning-700: #7c4e0e;
 
   /* Four surface aliases only. Text and borders address the ink ramp
      directly — a second full vocabulary is how design systems drift. */
