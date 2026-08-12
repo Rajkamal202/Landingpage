@@ -1,14 +1,10 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconGraph } from "@/components/icons";
+import type { Metadata } from "next";
+import { CanvasScreen } from "@/components/canvas/canvas-screen";
 
-export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Node canvas"
-      specSection="SPEC §8.4"
-      owner="Agent CANVAS"
-      summary="A visual graph for composing multi-step generations with typed ports and references."
-      glyph={IconGraph}
-    />
-  );
+export const metadata: Metadata = { title: "Node canvas" };
+
+/** SPEC §8.4 — a visual graph for composing multi-step generations. */
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <CanvasScreen projectId={id} />;
 }

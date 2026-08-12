@@ -238,6 +238,9 @@ export function CanvasFlow({ onOpenLibraryAt }: { onOpenLibraryAt: (screen: Poin
         onlyRenderVisibleElements
         attributionPosition="bottom-center"
         className="canvas-surface"
+        // The library's own attribution is a third-party mark inside our
+        // product chrome. Removing it is permitted by its MIT licence.
+        proOptions={{ hideAttribution: true }}
       >
         {/* The dot grid lives inside the viewport, so it pans and zooms as one
             GPU transform instead of repainting a background position. */}

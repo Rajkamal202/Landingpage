@@ -1,14 +1,10 @@
-import { RoutePlaceholder } from "@/components/app-shell/route-placeholder";
-import { IconFilm } from "@/components/icons";
+import type { Metadata } from "next";
+import { TimelineScreen } from "@/components/timeline/timeline-screen";
 
-export default function Page() {
-  return (
-    <RoutePlaceholder
-      title="Timeline editor"
-      specSection="SPEC §8.5"
-      owner="Agent TIMELINE"
-      summary="Multi-track editing with waveforms, snapping, trimming and a contextual property panel."
-      glyph={IconFilm}
-    />
-  );
+export const metadata: Metadata = { title: "Timeline editor" };
+
+/** SPEC §8.5 — multi-track editing with snapping, trimming and a property panel. */
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+  return <TimelineScreen projectId={id} />;
 }

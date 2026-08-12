@@ -104,9 +104,16 @@ export function HowItWorks() {
                     <p className="text-body-md max-w-measure text-ink-500">{step.body}</p>
                   </div>
 
+                  {/*
+                    The bleed hugs the screenshots with 24px of padding
+                    (SPEC §6.3) rather than spanning the whole column. Capping
+                    it here — not on the inner grid — keeps the gradient and the
+                    stills the same object instead of a slab with pictures
+                    floating in it.
+                  */}
                   <div
                     className={cn(
-                      "relative overflow-hidden rounded-xl p-6",
+                      "relative mx-auto w-full max-w-frame overflow-hidden rounded-xl p-6",
                       flipped && "lg:order-1",
                     )}
                   >

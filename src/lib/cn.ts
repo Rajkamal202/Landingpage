@@ -51,6 +51,7 @@ const SPACING = [
   "control-sm",
   "control-md",
   "control-lg",
+  "cta",
 ] as const;
 
 const RADII = ["sm", "md", "lg", "xl", "pill"] as const;

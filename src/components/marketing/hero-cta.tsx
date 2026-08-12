@@ -79,7 +79,7 @@ export function HeroCta() {
           onSubmit={handleSubmit}
           className={cn(
             "relative flex w-full items-center gap-2 rounded-pill bg-surface p-2 shadow-elev-3",
-            "sm:w-auto sm:min-w-panel",
+            "sm:w-auto sm:min-w-cta",
             "transition-ui duration-(--dur-fast)",
             // SPEC §6.2: focus lifts the container to --elev-4 with a 2px brand ring.
             "has-[input:focus]:shadow-elev-4 has-[input:focus]:ring-2 has-[input:focus]:ring-brand-500",

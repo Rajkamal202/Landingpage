@@ -1,11 +1,11 @@
-import { MarketingPlaceholder } from "@/components/marketing/placeholder";
+import type { Metadata } from "next";
+import { AuthForm } from "@/components/marketing/auth-form";
+
+export const metadata: Metadata = {
+  title: "Create your account",
+  robots: { index: false, follow: true },
+};
 
 export default function Page() {
-  return (
-    <MarketingPlaceholder
-      title="Create your account"
-      specSection="SPEC §7.2"
-      summary="A mock session. The form validates and navigates straight into the studio."
-    />
-  );
+  return <AuthForm mode="signup" />;
 }

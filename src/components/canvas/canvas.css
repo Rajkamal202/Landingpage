@@ -38,6 +38,9 @@
   width: 20000px;
   height: 20000px;
   pointer-events: none;
+  /* ViewportPortal appends after the node layer, so without this the grid
+     paints ON TOP of the node cards and every node looks translucent. */
+  z-index: -1;
 }
 
 /* ── Ports ─────────────────────────────────────────────────────────────

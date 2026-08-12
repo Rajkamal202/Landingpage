@@ -174,9 +174,17 @@
   --spacing-control-sm: 28px;
   --spacing-control-md: 36px;
   --spacing-control-lg: 44px;
+  /* The hero CTA (SPEC §6.2) has a fixed content width: a link icon, the
+     placeholder "Paste a video or slideshow link" set at body-md, and an inline
+     "Get started" pill. Below this the placeholder truncates, which is not
+     acceptable on the most important control on the site. */
+  --spacing-cta: 520px;
 
   /* ── Containers ────────────────────────────────────────────────────── */
   --container-marketing: 75rem; /* 1200px */
+  /* Screenshot frames in the how-it-works zigzag. Sized so a pair of 9:16
+     stills reads as product screenshots rather than billboards. */
+  --container-frame: 30rem; /* 480px */
   --container-measure: 68ch; /* marketing prose measure, SPEC §4.3 */
 
   /* ── Radii (SPEC §4.5) ─────────────────────────────────────────────── */

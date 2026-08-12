@@ -86,8 +86,14 @@ function CloudShapes() {
 }
 
 /**
- * The slower layer (0.15× scroll). Blurred hard and held back in opacity so it
+ * The slower layer (0.15× scroll). Softly blurred and held back in opacity so it
  * reads as distance rather than as a second copy of the near bank.
+ *
+ * The top and bottom bands carry most of the opacity; the MID band — the y 280
+ * to 420 strip that sits behind the headline — is deliberately kept near 0.25.
+ * SPEC §11 requires white on the cobalt sky to pass 4.5:1 and the illustration
+ * not to reduce contrast behind the headline, and a cream cumulus drifting
+ * through that band is exactly what would break it.
  */
 function CloudsFar() {
   return (
@@ -101,22 +107,22 @@ function CloudsFar() {
       <defs>
         <CloudShapes />
         <filter id={ID.far} x="-25%" y="-25%" width="150%" height="150%">
-          <feGaussianBlur stdDeviation="9" />
+          <feGaussianBlur stdDeviation="6" />
         </filter>
       </defs>
       <g filter={`url(#${ID.far})`}>
         {/* Top band — above y 130. */}
-        <use href={`#${ID.cloudWide}`} x="-80" y="8" fill={CLOUD_CREAM} opacity="0.34" />
-        <use href={`#${ID.cloudLow}`} x="420" y="-24" fill={CLOUD_CREAM} opacity="0.26" />
-        <use href={`#${ID.cloudPuff}`} x="1060" y="-10" fill={CLOUD_CREAM} opacity="0.32" />
-        <use href={`#${ID.cloudLow}`} x="1280" y="46" fill={CLOUD_ROSE} opacity="0.3" />
+        <use href={`#${ID.cloudWide}`} x="-80" y="8" fill={CLOUD_CREAM} opacity="0.52" />
+        <use href={`#${ID.cloudLow}`} x="420" y="-24" fill={CLOUD_CREAM} opacity="0.42" />
+        <use href={`#${ID.cloudPuff}`} x="1060" y="-10" fill={CLOUD_CREAM} opacity="0.5" />
+        <use href={`#${ID.cloudLow}`} x="1280" y="46" fill={CLOUD_ROSE} opacity="0.48" />
         {/* Far margins — cropped away on phones, depth on wide monitors. */}
-        <use href={`#${ID.cloudLow}`} x="-110" y="330" fill={CLOUD_CREAM} opacity="0.2" />
-        <use href={`#${ID.cloudPuff}`} x="1300" y="286" fill={CLOUD_CREAM} opacity="0.22" />
+        <use href={`#${ID.cloudLow}`} x="-110" y="330" fill={CLOUD_CREAM} opacity="0.24" />
+        <use href={`#${ID.cloudPuff}`} x="1300" y="286" fill={CLOUD_CREAM} opacity="0.26" />
         {/* Bottom bank — below y 600. */}
-        <use href={`#${ID.cloudWide}`} x="140" y="646" fill={CLOUD_CREAM} opacity="0.34" />
-        <use href={`#${ID.cloudPuff}`} x="640" y="690" fill={CLOUD_ROSE} opacity="0.3" />
-        <use href={`#${ID.cloudWide}`} x="1010" y="628" fill={CLOUD_CREAM} opacity="0.32" />
+        <use href={`#${ID.cloudWide}`} x="140" y="646" fill={CLOUD_CREAM} opacity="0.54" />
+        <use href={`#${ID.cloudPuff}`} x="640" y="690" fill={CLOUD_ROSE} opacity="0.5" />
+        <use href={`#${ID.cloudWide}`} x="1010" y="628" fill={CLOUD_CREAM} opacity="0.52" />
       </g>
     </svg>
   );
