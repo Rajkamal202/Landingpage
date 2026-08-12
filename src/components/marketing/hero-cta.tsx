@@ -73,9 +73,10 @@ export function HeroCta() {
   };
 
   return (
-    <div className="flex w-full flex-col items-center gap-3">
+    <div className="relative flex w-full flex-col items-center gap-3">
       <div className="flex w-full flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
         <form
+          noValidate
           onSubmit={handleSubmit}
           className={cn(
             "relative flex w-full items-center gap-2 rounded-pill bg-surface p-2 shadow-elev-3",
@@ -105,7 +106,13 @@ export function HeroCta() {
           </span>
 
           <input
-            type="url"
+            // NOT type="url". A url input triggers the browser's own constraint
+            // validation, which silently blocks submit before React sees it —
+            // so our designed message never rendered and the user got the
+            // native bubble instead, which is precisely the generic "invalid
+            // input" SPEC §6.2 forbids. `inputMode` still gets the URL keyboard
+            // on mobile; the validation is ours.
+            type="text"
             inputMode="url"
             autoComplete="off"
             spellCheck={false}
@@ -151,8 +158,14 @@ export function HeroCta() {
         </Button>
       </div>
 
-      {/* Reserved space: this row is in the layout whether or not it has copy. */}
-      <div className="flex min-h-8 items-start justify-center">
+      {/*
+        SPEC §6.2: "no layout shift (space is reserved)". Reserving a fixed
+        height only works while the message fits it — the unsupported-platform
+        string wraps to two lines and pushed the CTA up 12px. Taking the row out
+        of flow entirely makes the guarantee structural: the message can be any
+        length and the control above it cannot move.
+      */}
+      <div className="absolute inset-x-0 top-full mt-3 flex items-start justify-center">
         <AnimatePresence initial={false}>
           {error ? (
             <motion.p

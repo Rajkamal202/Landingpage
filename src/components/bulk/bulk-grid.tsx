@@ -291,6 +291,13 @@ export function BulkGrid({ onAddRow, onImport, onGenerateRows }: BulkGridProps) 
             // cannot express: it is "any printable character".
             if (event.metaKey || event.ctrlKey || event.altKey) return;
             if (event.key.length !== 1) return;
+            // Keystrokes bubble up from the cell editor once it is open. Without
+            // this guard the grid preventDefault()s every character the user
+            // types INTO the editor, so a cell captured only the one keystroke
+            // that opened it and swallowed the rest of the word.
+            if (useBulkStore.getState().editing) return;
+            const target = event.target as HTMLElement | null;
+            if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
             event.preventDefault();
             useBulkStore.getState().beginEdit(event.key);
           }}

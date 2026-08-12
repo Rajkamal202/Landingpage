@@ -102,6 +102,21 @@ test("opening a project adds a workspace tab that survives reload", async ({ pag
   await expect(page.getByRole("navigation", { name: /open projects/i })).toBeVisible();
 });
 
+test("bulk grid takes a whole word when you type into a cell", async ({ page }) => {
+  // SPEC §8.7's first non-negotiable: "type to begin editing". The grid's
+  // keydown handler used to preventDefault() every printable key, including
+  // the ones bubbling out of the editor it had just opened, so a cell captured
+  // one character and swallowed the rest.
+  await page.goto(`/app/p/${PROJECT_ID}/bulk`);
+  await page.waitForLoadState("networkidle");
+
+  await page.getByRole("gridcell").first().click();
+  await page.keyboard.type("Typed straight in");
+  await page.keyboard.press("Enter");
+
+  await expect(page.getByText("Typed straight in")).toBeVisible();
+});
+
 test("bulk grid pastes TSV from an external spreadsheet", async ({ page, context }) => {
   // SPEC §15: "Pasting a column out of Google Sheets and having it just work is
   // the feature that makes the screen believable."
