@@ -16,8 +16,12 @@ export function useColumnCount(): number {
   const sm = useMediaQuery("(min-width: 640px)");
   const lg = useMediaQuery("(min-width: 1024px)");
   const xl = useMediaQuery("(min-width: 1536px)");
-  if (xl) return 5;
-  if (lg) return 4;
+  // Denser than a gallery on purpose. At four columns a 9:16 tile is over
+  // 500px tall inside a 1200px container, so a single row does not fit above
+  // the floating composer and the grid reads as three enormous posters rather
+  // than a set of results to compare.
+  if (xl) return 6;
+  if (lg) return 5;
   if (sm) return 3;
   return 2;
 }

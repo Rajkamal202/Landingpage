@@ -201,12 +201,35 @@ export function StudioScreen({ projectId }: { projectId: string }) {
     },
   };
 
+  // The composer and mode toolbar float over the results, so the scroll area
+  // has to know how tall they currently are.
+  const dockRef = React.useRef<HTMLDivElement>(null);
+  const [dockHeight, setDockHeight] = React.useState(320);
+
+  React.useEffect(() => {
+    const node = dockRef.current;
+    if (!node) return;
+    const observer = new ResizeObserver(([entry]) => {
+      if (entry) setDockHeight(Math.round(entry.contentRect.height));
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   const selected = items.filter((generation) => selection.has(generation.id));
 
   return (
     <main className="relative flex min-h-0 flex-1 flex-col">
       <div className="min-h-0 flex-1 overflow-y-auto">
-        <div className="mx-auto w-full max-w-marketing px-4 pb-24 pt-6 sm:px-6">
+        <div
+          className="mx-auto w-full max-w-marketing px-4 pt-6 sm:px-6"
+          // dynamic: the grid reserves exactly the height of the floating
+          // composer cluster. A fixed value cannot work — SPEC §8.2 has each
+          // mode swap the composer's controls and animate its height — and
+          // guessing low means the toolbar sits on top of the last row of
+          // results and their type badges.
+          style={{ paddingBottom: `${dockHeight + 24}px` }}
+        >
           <header className="mb-6 flex flex-wrap items-baseline gap-3">
             {project.data ? (
               <h1 className="text-title-lg text-ink-950">{project.data.name}</h1>
@@ -230,8 +253,6 @@ export function StudioScreen({ projectId }: { projectId: string }) {
               shiftHeld.current = event.shiftKey;
             }}
           />
-
-          <div aria-hidden="true" className="h-32" />
         </div>
       </div>
 
@@ -240,7 +261,10 @@ export function StudioScreen({ projectId }: { projectId: string }) {
         className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-page to-transparent"
       />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 px-3 pb-3">
+      <div
+        ref={dockRef}
+        className="pointer-events-none absolute inset-x-0 bottom-0 flex flex-col items-center gap-3 px-3 pb-3"
+      >
         <div className="pointer-events-auto">
           <SelectionBar
             count={selection.size}
