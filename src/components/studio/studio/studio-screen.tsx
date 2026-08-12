@@ -15,6 +15,7 @@ import { queryKeys } from "@/lib/api/keys";
 import { getProject } from "@/lib/api/projects";
 import { useSearchParamEnum, useSearchParamState } from "@/lib/hooks/use-search-param-state";
 import { useShortcut } from "@/lib/hooks/use-shortcuts";
+import { useRegisterWorkspaceTab } from "@/components/app-shell/use-register-tab";
 import { useWorkspaceStore } from "@/lib/stores/workspace";
 import type { Asset, Generation, GenerationMode } from "@/lib/schemas";
 import { Lightbox } from "@/components/ui/lightbox";
@@ -32,7 +33,6 @@ import { useGenerationRunner } from "./use-generation-runner";
 /** SPEC §8.2 — full-bleed results with the composer docked at the bottom. */
 export function StudioScreen({ projectId }: { projectId: string }) {
   const queryClient = useQueryClient();
-  const openTab = useWorkspaceStore((state) => state.openTab);
   const setLibraryOpen = useWorkspaceStore((state) => state.setLibraryOpen);
   const libraryOpen = useWorkspaceStore((state) => state.libraryOpen);
 
@@ -64,11 +64,7 @@ export function StudioScreen({ projectId }: { projectId: string }) {
 
   // Landing on this URL directly still registers the tab, so the shell's tab
   // strip and the route never disagree about what is open (SPEC §7.1).
-  React.useEffect(() => {
-    const data = project.data;
-    if (!data) return;
-    openTab({ projectId: data.id, name: data.name, kind: data.kind, surface: "studio" });
-  }, [project.data, openTab]);
+  useRegisterWorkspaceTab(project.data, "studio");
 
   useShortcut({
     keys: "l",

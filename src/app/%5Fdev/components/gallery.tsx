@@ -197,7 +197,7 @@ export function ComponentGallery() {
         </Row>
 
         <Row label="Slider, stepper, segmented control">
-          <div className="w-48">
+          <div className="w-panel">
             <Slider
               value={slider}
               onValueChange={setSlider}
@@ -258,10 +258,10 @@ export function ComponentGallery() {
           <StatusPill status="failed" />
         </Row>
         <Row label="Progress">
-          <div className="w-48">
+          <div className="w-panel">
             <Progress value={64} aria-label="Export progress" />
           </div>
-          <div className="w-48">
+          <div className="w-panel">
             <Progress value={0} indeterminate aria-label="Preparing" />
           </div>
           <span className="text-ink-950">
@@ -269,7 +269,7 @@ export function ComponentGallery() {
           </span>
         </Row>
         <Row label="Skeletons, not spinners">
-          <div className="flex w-64 flex-col gap-3">
+          <div className="flex w-panel flex-col gap-3">
             <Skeleton className="aspect-9/16 w-24 rounded-md" />
             <SkeletonText lines={3} />
           </div>

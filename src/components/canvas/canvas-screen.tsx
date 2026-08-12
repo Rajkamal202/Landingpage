@@ -8,8 +8,8 @@ import { listAssets } from "@/lib/api/assets";
 import { listModels } from "@/lib/api/generations";
 import { listActors } from "@/lib/api/actors";
 import { useCanvasStore } from "@/lib/stores/canvas";
-import { useWorkspaceStore } from "@/lib/stores/workspace";
 import { EditorFrame } from "@/components/app-shell/editor-frame";
+import { useRegisterWorkspaceTab } from "@/components/app-shell/use-register-tab";
 import { IconGraph } from "@/components/icons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ReactFlowProvider } from "@xyflow/react";
@@ -47,7 +47,6 @@ export function CanvasScreen({ projectId }: { projectId: string }) {
   const load = useCanvasStore((state) => state.load);
   const nodeCount = useCanvasStore((state) => state.nodes.length);
   const addNode = useCanvasStore((state) => state.addNode);
-  const openTab = useWorkspaceStore((state) => state.openTab);
 
   const [libraryOpen, setLibraryOpen] = React.useState(false);
   const dropPoint = React.useRef<{ x: number; y: number } | null>(null);
@@ -57,11 +56,7 @@ export function CanvasScreen({ projectId }: { projectId: string }) {
     if (canvas) load(canvas);
   }, [canvas, load]);
 
-  React.useEffect(() => {
-    const data = project.data;
-    if (!data) return;
-    openTab({ projectId: data.id, name: data.name, kind: data.kind, surface: "canvas" });
-  }, [project.data, openTab]);
+  useRegisterWorkspaceTab(project.data, "canvas");
 
   const data = React.useMemo<CanvasData>(
     () => ({
@@ -131,7 +126,7 @@ function CanvasSkeleton() {
         <div className="relative min-w-0 flex-1 bg-page dot-grid p-12">
           <div className="flex gap-16">
             {[0, 1, 2].map((column) => (
-              <Skeleton key={column} className="h-40 w-panel rounded-lg" />
+              <Skeleton key={column} className="h-32 w-panel rounded-lg" />
             ))}
           </div>
         </div>

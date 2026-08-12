@@ -5,7 +5,7 @@
    ───────────────────────────────────────────────────────────────────────
    Tailwind's default palette, spacing scale, shadows and type scale are
    DELETED below. `text-gray-500`, `bg-blue-500`, `shadow-md`, `text-sm`
-   and `p-7` do not compile. Off-token values are build errors, not code
+   and off-scale spacing all fail to compile. Off-token values are build errors, not code
    review conversations.
    ═══════════════════════════════════════════════════════════════════════ */
 

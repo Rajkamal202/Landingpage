@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { queryKeys } from "@/lib/api/keys";
 import { getProject, getProjectDocument } from "@/lib/api/projects";
 import { useTimelineStore } from "@/lib/stores/timeline";
-import { useWorkspaceStore } from "@/lib/stores/workspace";
 import { EditorFrame } from "@/components/app-shell/editor-frame";
+import { useRegisterWorkspaceTab } from "@/components/app-shell/use-register-tab";
 import { IconFilm } from "@/components/icons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PreviewStage } from "./preview-stage";
@@ -38,25 +38,13 @@ export function TimelineScreen({ projectId }: { projectId: string }) {
 
   const load = useTimelineStore((state) => state.load);
   const ready = useTimelineStore((state) => state.ready);
-  const openTab = useWorkspaceStore((state) => state.openTab);
 
   const timeline = document.data?.timeline;
   React.useEffect(() => {
     if (timeline) load(timeline);
   }, [timeline, load]);
 
-  // SPEC §7.1 — arriving at an editor directly opens its workspace tab, so the
-  // tab strip always reflects what is actually open.
-  React.useEffect(() => {
-    const data = project.data;
-    if (!data) return;
-    openTab({
-      projectId: data.id,
-      name: data.name,
-      kind: data.kind,
-      surface: "timeline",
-    });
-  }, [project.data, openTab]);
+  useRegisterWorkspaceTab(project.data, "timeline");
 
   const projectName = project.data?.name ?? "Loading project";
 
@@ -100,9 +88,9 @@ function TimelineSkeleton() {
       <div className="flex min-h-0 flex-1">
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="grid flex-1 place-items-center bg-ink-100 p-8">
-            <Skeleton className="aspect-9/16 h-full max-h-96 rounded-lg" />
+            <Skeleton className="aspect-9/16 h-full rounded-lg" />
           </div>
-          <div className="flex h-64 shrink-0 flex-col gap-2 border-t border-ink-200 bg-surface p-3">
+          <div className="flex h-panel shrink-0 flex-col gap-2 border-t border-ink-200 bg-surface p-3">
             {[0, 1, 2, 3].map((row) => (
               <Skeleton key={row} className="h-12 w-full" />
             ))}

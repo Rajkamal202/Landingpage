@@ -193,7 +193,7 @@ export function TemplatesScreen() {
             value={category}
             onValueChange={setCategory}
             options={CATEGORY_OPTIONS}
-            className="w-40"
+            className="w-32"
           />
           <FilterSelect
             label="Filter by aspect"
@@ -201,7 +201,7 @@ export function TemplatesScreen() {
             value={aspect}
             onValueChange={setAspect}
             options={ASPECT_OPTIONS}
-            className="w-36"
+            className="w-32"
           />
           <FilterSelect
             label="Filter by duration"
@@ -209,7 +209,7 @@ export function TemplatesScreen() {
             value={duration}
             onValueChange={setDuration}
             options={DURATION_OPTIONS}
-            className="w-36"
+            className="w-32"
           />
           <FilterSelect
             label="Filter by industry"
@@ -217,7 +217,7 @@ export function TemplatesScreen() {
             value={industry}
             onValueChange={setIndustry}
             options={industries.map((name) => ({ value: name, label: name }))}
-            className="w-40"
+            className="w-32"
           />
         </div>
       }

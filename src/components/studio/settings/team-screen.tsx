@@ -269,7 +269,7 @@ export function TeamScreen() {
               <div className="flex flex-col gap-2">
                 <span className="text-label text-ink-700">Role</span>
                 <Select value={field.value} onValueChange={field.onChange}>
-                  <SelectTrigger aria-label="Role for the new member" className="w-40">
+                  <SelectTrigger aria-label="Role for the new member" className="w-32">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>

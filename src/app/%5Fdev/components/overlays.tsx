@@ -194,7 +194,7 @@ export function GalleryOverlays() {
         description="Every error state has to be reachable without editing code."
       >
         <Row label={`Injected failure rate: ${Math.round(chaos[0] ?? 0)}%`}>
-          <div className="w-64">
+          <div className="w-panel">
             <Slider
               value={chaos}
               onValueChange={(next) => {

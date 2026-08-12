@@ -66,6 +66,22 @@ const RULES = [
     message: "Arbitrary utility value. Add a token to globals.css instead of a one-off.",
   },
   {
+    id: "no-undefined-spacing",
+    /**
+     * A utility naming a spacing key that does not exist — `w-36`, `p-40` —
+     * produces NO CSS AT ALL. Tailwind simply does not emit the class, so the
+     * element silently falls back to `auto` and the layout quietly breaks. It
+     * is invisible to typecheck, to lint, and to the build: only looking at the
+     * page reveals it, and only if you know what it should have looked like.
+     *
+     * The allowed steps are SPEC §4.4's list. Anything else is a typo or a
+     * value that needs adding to the scale deliberately.
+     */
+    re: /(?:^|["'`\s])(?:-?(?:w|h|min-w|min-h|max-w|max-h|size|gap(?:-x|-y)?|p|px|py|pt|pb|pl|pr|m|mx|my|mt|mb|ml|mr|top|left|right|bottom|inset|space-x|space-y|translate-x|translate-y|basis)-(?:7|9|11|13|14|15|17|18|19|21|22|23|25|26|27|28|29|30|31|33|34|35|36|37|38|39|40|4[1-9]|5[0-9]|6[0-9]|7[0-9]|8[0-9]|9[0-9]|[1-9][0-9]{2,}))(?![\w.-])/g,
+    message:
+      "Spacing key is not on the SPEC §4.4 scale, so this utility emits no CSS at all. Allowed: 0 1 2 3 4 5 6 8 10 12 16 20 24 32, plus the named chrome keys.",
+  },
+  {
     id: "no-transition-all",
     re: /\btransition-all\b|transition-property:\s*all\b/g,
     message: "SPEC §4.6: hover transitions never animate `all`. Use `transition-ui`.",

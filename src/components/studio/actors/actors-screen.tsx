@@ -114,7 +114,7 @@ export function ActorsScreen() {
             value={gender}
             onValueChange={setGender}
             options={GENDER_OPTIONS}
-            className="w-40"
+            className="w-32"
           />
           <FilterSelect
             label="Filter by age range"
@@ -130,7 +130,7 @@ export function ActorsScreen() {
             value={style}
             onValueChange={setStyle}
             options={styles.map((name) => ({ value: name, label: name }))}
-            className="w-36"
+            className="w-32"
           />
           <FilterSelect
             label="Filter by language"
@@ -138,7 +138,7 @@ export function ActorsScreen() {
             value={language}
             onValueChange={setLanguage}
             options={languages.map((name) => ({ value: name, label: name }))}
-            className="w-36"
+            className="w-32"
           />
         </div>
       }

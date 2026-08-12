@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { listAssets } from "@/lib/api/assets";
 import { queryKeys } from "@/lib/api/keys";
 import { getProject, getProjectDocument } from "@/lib/api/projects";
+import { useRegisterWorkspaceTab } from "@/components/app-shell/use-register-tab";
 import type { AssetDragPayload } from "@/lib/dnd/payload";
 import type { Asset, SlideLayer } from "@/lib/schemas";
 import { selectSlideshowActions, useSlideshowStore } from "@/lib/stores/slideshow";
@@ -39,6 +40,9 @@ export function SlideshowEditor({ projectId }: { projectId: string }) {
     queryKey: queryKeys.projects.detail(projectId),
     queryFn: () => getProject(projectId),
   });
+
+  // SPEC §7.1 — reaching this route directly still opens its workspace tab.
+  useRegisterWorkspaceTab(project.data, "slideshow");
 
   const documentQuery = useQuery({
     queryKey: queryKeys.projects.document(projectId),

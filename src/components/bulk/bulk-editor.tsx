@@ -7,6 +7,7 @@ import type { BulkRow } from "@/lib/schemas";
 import { queryKeys } from "@/lib/api/keys";
 import { ApiError } from "@/lib/api/client";
 import { getProject, getProjectDocument } from "@/lib/api/projects";
+import { useRegisterWorkspaceTab } from "@/components/app-shell/use-register-tab";
 import { EditorFrame } from "@/components/app-shell/editor-frame";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -49,6 +50,9 @@ function BulkWorkspace({ projectId }: { projectId: string }) {
     queryKey: queryKeys.projects.detail(projectId),
     queryFn: () => getProject(projectId),
   });
+
+  // SPEC §7.1 — reaching this route directly still opens its workspace tab.
+  useRegisterWorkspaceTab(project.data, "bulk");
   const docQuery = useQuery({
     queryKey: queryKeys.projects.document(projectId),
     queryFn: () => getProjectDocument(projectId),
