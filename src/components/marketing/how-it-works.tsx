@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 import { Rise } from "@/components/ui/scroll-reveal";
 import { Container, Section, SectionHeading } from "./section";
@@ -96,12 +97,12 @@ export function HowItWorks() {
                   <div className={cn("flex flex-col gap-4", flipped && "lg:order-2")}>
                     <span
                       aria-hidden="true"
-                      className="mono-sm grid size-10 place-items-center rounded-pill bg-ink-950 text-white"
+                      className="grid size-10 place-items-center rounded-pill bg-ink-950 mono-sm text-white"
                     >
                       {step.n}
                     </span>
                     <h3 className="text-title-lg text-ink-950">{step.title}</h3>
-                    <p className="text-body-md max-w-measure text-ink-500">{step.body}</p>
+                    <p className="max-w-measure text-body-md text-ink-500">{step.body}</p>
                   </div>
 
                   {/*
@@ -124,14 +125,17 @@ export function HowItWorks() {
                       className="relative grid grid-cols-2 gap-4"
                     >
                       {step.posters.map((src) => (
-                        <img
+                        // Below the fold, so no priority — but next/image still
+                        // serves a right-sized source instead of a 540px file
+                        // for a ~200px slot.
+                        <Image
                           key={src}
                           src={src}
                           alt=""
                           width={540}
                           height={960}
+                          sizes="(min-width: 1024px) 220px, 40vw"
                           loading="lazy"
-                          decoding="async"
                           className="h-auto w-full rounded-lg bg-ink-100 object-cover shadow-elev-2"
                         />
                       ))}
