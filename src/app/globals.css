@@ -276,6 +276,29 @@
       transform: translateX(100%);
     }
   }
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @keyframes hero-scale {
+    from {
+      opacity: 0;
+      transform: scale(0.98);
+    }
+  }
+  @keyframes hero-lift {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+  }
+  @keyframes hero-fade {
+    from {
+      opacity: 0;
+    }
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -529,6 +552,38 @@
   [data-state="checked"] & {
     stroke-dashoffset: 0;
   }
+}
+
+/* SPEC §6.2 — the hero load sequence, in CSS rather than in Motion.
+   
+   This is a performance decision, not a stylistic one. Motion renders its
+   `initial` state into the server HTML, so a hero authored with
+   `initial={{ opacity: 0 }}` stays invisible until React has hydrated and the
+   animation has run. On a throttled mobile connection that measured LCP at
+   4.7s — identical to time-to-interactive, because the text was literally
+   waiting for JavaScript. A CSS animation starts at first paint, so the same
+   choreography now costs nothing.
+
+   Each beat is a delay from `hero-sequence.ts`; the global reduced-motion rule
+   already collapses all of these to 1ms. */
+@utility hero-in {
+  animation: hero-rise var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--beat, 0ms);
+}
+
+@utility hero-in-scale {
+  animation: hero-scale var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--beat, 0ms);
+}
+
+@utility hero-in-lift {
+  animation: hero-lift var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--beat, 0ms);
+}
+
+@utility hero-in-fade {
+  animation: hero-fade var(--dur-slow) var(--ease-out) both;
+  animation-delay: var(--beat, 0ms);
 }
 
 /* Scroll-container ceilings. These are viewport-relative rather than fixed

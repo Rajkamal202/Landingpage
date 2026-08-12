@@ -1,11 +1,8 @@
-"use client";
-
-import { motion, useReducedMotion } from "motion/react";
 import { Container } from "./section";
 import { HeroCta } from "./hero-cta";
 import { ProductFrame } from "./product-frame";
 import { Sky } from "./illustration/sky";
-import { HERO_BEATS, heroBeat } from "./hero-sequence";
+import { HERO_BEATS } from "./hero-sequence";
 
 /**
  * SPEC §6.2 — act one.
@@ -19,6 +16,13 @@ import { HERO_BEATS, heroBeat } from "./hero-sequence";
  * one it was eyeballed at.
  *
  * Contrast is handled in `illustration/sky.tsx`, where the numbers are.
+ *
+ * The load sequence is CSS, not Motion, and this is a SERVER component as a
+ * result. Motion writes its `initial` state into the server HTML, so the
+ * headline shipped at `opacity: 0` and did not appear until React had
+ * hydrated — which measured a 4.7s LCP on throttled mobile, exactly equal to
+ * time-to-interactive. A CSS animation starts at first paint. Same beats, same
+ * choreography, no JavaScript on the critical path.
  */
 
 const HEADLINE_LINES = ["Your AI short-form ads", "editor at scale"] as const;
@@ -31,71 +35,62 @@ const HERO_POSTERS = [
   { id: "clip-22", src: "/media/posters/clip-22.jpg" },
 ] as const;
 
-export function Hero() {
-  const reduced = useReducedMotion();
+/** Seconds → the `--beat` custom property the hero utilities read. */
+const beat = (seconds: number) => ({ "--beat": `${seconds}s` }) as React.CSSProperties;
 
+export function Hero() {
   return (
     <section className="relative">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={heroBeat(HERO_BEATS.sky, reduced)}
-        className="absolute inset-0"
-      >
+      {/* dynamic: each beat's delay comes from the shared HERO_BEATS timeline,
+          so the choreography lives in one file rather than in six classNames. */}
+      <div className="hero-in-fade absolute inset-0" style={beat(HERO_BEATS.sky)}>
         <Sky />
-      </motion.div>
+      </div>
 
       <div className="relative mx-auto flex min-h-dvh w-full max-w-marketing flex-col px-6 pb-20 pt-32 lg:px-10">
         <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
           <h1 className="text-hero-sm md:text-hero-md lg:text-hero-lg max-w-marketing text-white">
             {HEADLINE_LINES.map((line, index) => (
-              <motion.span
+              // dynamic: SPEC §6.2 staggers the two headline lines 60ms apart.
+              <span
                 key={line}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={heroBeat(
-                  HERO_BEATS.headline + index * HERO_BEATS.headlineStagger,
-                  reduced,
-                )}
-                className="block"
+                className="hero-in block"
+                style={beat(HERO_BEATS.headline + index * HERO_BEATS.headlineStagger)}
               >
                 {line}
-              </motion.span>
+              </span>
             ))}
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={heroBeat(HERO_BEATS.sub, reduced)}
-            className="text-body-lg max-w-measure text-white/82"
+          {/* dynamic: beat from the shared timeline. */}
+          <p
+            className="hero-in text-body-lg max-w-measure text-white/82"
+            style={beat(HERO_BEATS.sub)}
           >
             Clone what already works, then make it yours — in minutes, not weeks.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={heroBeat(HERO_BEATS.cta, reduced)}
-            className="mt-2 flex w-full justify-center"
+          {/* dynamic: beat from the shared timeline. */}
+          <div
+            className="hero-in-scale mt-2 flex w-full justify-center"
+            style={beat(HERO_BEATS.cta)}
           >
             <HeroCta />
-          </motion.div>
+          </div>
         </div>
       </div>
 
       <Container className="relative -mt-20 lg:-mt-24">
-        <motion.div
-          initial={{ opacity: 0, y: 24, scale: 0.96 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={heroBeat(HERO_BEATS.screenshot, reduced)}
-          className="-mb-24 lg:-mb-32"
+        {/* dynamic: the last beat — the screenshot rises 24px and scales up. */}
+        <div
+          className="hero-in-lift -mb-24 lg:-mb-32"
+          style={beat(HERO_BEATS.screenshot)}
         >
           <ProductFrame
             posters={HERO_POSTERS}
             label="Five vertical ads produced in the Vireo studio, shown side by side."
           />
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

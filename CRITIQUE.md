@@ -170,10 +170,31 @@ Being straight about the gaps rather than implying completeness:
    cycles are computed from the plan price and cycle end date, isolated in one
    module documented as the seam to delete when the endpoint lands.
 
-3. **Lighthouse has not been run.** §13 asks for ≥95 performance and 100
-   accessibility on `/`. Axe is clean and the LCP images are served through
-   `next/image` with `priority` and `sizes`, but I have measured neither the
-   score nor LCP and CLS directly, so I am not claiming those numbers.
+3. **Lighthouse — desktop passes, mobile does not.** Measured against a
+   production build:
+
+   | | Perf | A11y | Best practices | SEO | LCP | CLS |
+   |---|---|---|---|---|---|---|
+   | Desktop | **99** | **100** | **100** | **100** | **1.0s** | **0** |
+   | Mobile | 84 | 100 | 100 | 100 | 4.6s | 0 |
+
+   Desktop clears every §13 target (≥95 performance, 100 accessibility, LCP
+   < 2.0s, CLS < 0.05). Mobile does not clear performance.
+
+   *Fixed along the way:* the hero was authored in Motion, which writes its
+   `initial` state into the server HTML — so the headline shipped at
+   `opacity: 0` and did not appear until React had hydrated. Mobile LCP was
+   exactly equal to time-to-interactive, because the text was waiting for
+   JavaScript. The load sequence is now CSS, the hero is a server component,
+   and first contentful paint went from 4.7s to **0.9s**.
+
+   *Still open on mobile:* LCP is the hero sub-line, which cannot paint before
+   its own entrance animation reaches it — SPEC §6.2's orchestrated ~900ms
+   sequence and §13's LCP budget are in genuine tension on a throttled device.
+   Measured directly under 4× CPU throttling and 1.6 Mbps, LCP is **1.9s**;
+   Lighthouse's simulated (Lantern) model is more pessimistic and reports 4.6s.
+   I am reporting both rather than picking the flattering one. The remaining
+   headroom is 78 KiB of unused JavaScript, which I have not chased.
 
 4. **60fps is engineered for, not profiled.** The timeline and canvas use
    store selectors, transform-based positioning and memoised children, and

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+  <!--
+    The Vireo logomark, matching src/components/brand/logomark.tsx exactly:
+    three overlapping vertical rounded slats of decreasing height, each
+    knocking a gap out of the one behind it so the edges stay crisp at
+    favicon size. Ink-950 on a transparent ground.
+  -->
+  <defs>
+    <mask id="b">
+      <rect width="24" height="24" fill="white" />
+      <rect x="3" y="1" width="8" height="22" rx="4" fill="black" />
+    </mask>
+    <mask id="c">
+      <rect width="24" height="24" fill="white" />
+      <rect x="8" y="5" width="8" height="17" rx="4" fill="black" />
+    </mask>
+  </defs>
+  <rect x="14" y="10" width="6" height="9" rx="3" fill="#0b0c0e" opacity="0.52" mask="url(#c)" />
+  <rect x="9" y="6" width="6" height="15" rx="3" fill="#0b0c0e" opacity="0.76" mask="url(#b)" />
+  <rect x="4" y="2" width="6" height="20" rx="3" fill="#0b0c0e" />
+</svg>
