@@ -4,18 +4,18 @@ import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://vireo.studio"),
+  metadataBase: new URL("https://avelon.studio"),
   title: {
-    default: "Vireo — Your AI short-form ads editor at scale",
-    template: "%s — Vireo",
+    default: "Avelon — The AI Video Ad Studio for DTC Brands | Coming Soon",
+    template: "%s — Avelon",
   },
   description:
-    "Clone what already works, then make it yours. Vireo pulls a video apart into editable scenes, text, and captions, then fans one approved cut into dozens of variations.",
+    "Transform winning ads and product assets into high-converting video variations in minutes. Coming soon.",
   openGraph: {
     type: "website",
-    siteName: "Vireo",
-    title: "Vireo — Your AI short-form ads editor at scale",
-    description: "Clone what already works, then make it yours — in minutes, not weeks.",
+    siteName: "Avelon",
+    title: "Avelon — The AI Video Ad Studio for DTC Brands | Coming Soon",
+    description: "Transform winning ads and product assets into high-converting video variations in minutes.",
   },
   robots: { index: true, follow: true },
 };

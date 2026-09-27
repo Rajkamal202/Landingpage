@@ -5,77 +5,132 @@ import { Container, Section, SectionHeading } from "./section";
 import { Bleed, type BleedTone } from "./illustration/bleed";
 import { SECTION_IDS } from "./site-links";
 
-/**
- * SPEC §6.3 — six steps, alternating two-column zigzag, 96px apart.
- *
- * It is an `<ol>` because the spec is explicit that the numbering is real:
- * these steps happen in this order. A screen-reader user gets "list, 6 items,
- * item 1 of 6" for free, which is the same information the ink circles carry
- * visually, and the marker itself is `aria-hidden` so the count is not read
- * twice.
- *
- * Each step reveals on its own scroll trigger rather than sharing one with the
- * whole list — six items staggered from a single group would finish animating
- * four screens before the reader reaches them.
- */
+interface StepMedia {
+  readonly poster: string;
+  readonly video?: string;
+  readonly title?: string;
+}
 
 interface Step {
   readonly n: number;
   readonly title: string;
   readonly body: string;
   readonly tone: BleedTone;
-  readonly posters: readonly [string, string];
+  readonly items: readonly [StepMedia, StepMedia];
   readonly frameLabel: string;
 }
 
 const STEPS: readonly Step[] = [
   {
     n: 1,
-    title: "Clone",
-    body: "Drop in a TikTok, Instagram, or Meta Ads link and Vireo pulls the video apart — scenes, on-screen text, overlays, and captions become editable layers.",
+    title: "Clone & Deconstruct Winning Ads",
+    body: "Paste any TikTok, Instagram Reel, or Meta Ads link. Avelon deconstructs the winning video into editable layers: scene breaks, on-screen text, pacing, voiceovers, and visual hooks.",
     tone: "blue-violet",
-    posters: ["/media/posters/clip-01.jpg", "/media/posters/clip-17.jpg"],
-    frameLabel: "A source video beside the editable scenes Vireo extracted from it.",
+    items: [
+      {
+        poster: "/media/real-ads/ex-camera-pov.jpg",
+        video: "/media/real-ads/ex-camera-pov.mp4",
+        title: "Original Reference Ad",
+      },
+      {
+        poster: "/media/real-ads/ex-direct-to-camera.jpg",
+        video: "/media/real-ads/ex-direct-to-camera.mp4",
+        title: "Extracted Hook Scene",
+      },
+    ],
+    frameLabel: "A source ad beside the editable scenes Avelon deconstructed from it.",
   },
   {
     n: 2,
-    title: "Create",
-    body: "Generate UGC-style video with AI actors, voices, and scripts. Authentic-looking content without a shoot.",
+    title: "Hyper-Realistic AI UGC Actors",
+    body: "Produce authentic creator-led testimonials, unboxings, and product reviews with diverse AI talent. Consistent facial likeness, natural vocal inflection, and emotional resonance without a physical shoot.",
     tone: "rose-amber",
-    posters: ["/media/posters/clip-03.jpg", "/media/posters/clip-11.jpg"],
-    frameLabel: "Two UGC-style takes generated from the same script.",
+    items: [
+      {
+        poster: "/media/real-ads/ex-ugc.jpg",
+        video: "/media/real-ads/ex-ugc.mp4",
+        title: "Generated UGC Take",
+      },
+      {
+        poster: "/media/avatars/avatar-preset-cn-female-young.jpg",
+        title: "AI Creator Talent Preset",
+      },
+    ],
+    frameLabel: "Two UGC creator variations produced without booking talent.",
   },
   {
     n: 3,
-    title: "Generate",
-    body: "Compose image and video generations on a visual canvas. Wire up references, branch ideas, and iterate without leaving the graph.",
+    title: "Studio-Grade Photoshoot Environments",
+    body: "Drop in your raw packshot or 3D product render. Avelon casts it into prestige architectural sets — Calacatta marble, Kyoto gardens, or liquid caustics — with photorealistic lighting and contact shadows.",
     tone: "violet-pink",
-    posters: ["/media/posters/clip-02.jpg", "/media/posters/clip-18.jpg"],
-    frameLabel: "Two branches of the same generation, produced side by side on the canvas.",
+    items: [
+      {
+        poster: "/media/photoshoot-templates/calacatta-silk.jpg",
+        title: "Calacatta Silk Studio",
+      },
+      {
+        poster: "/media/photoshoot-templates/kyoto-conservatory.jpg",
+        title: "Kyoto Bamboo Conservatory",
+      },
+    ],
+    frameLabel: "Photorealistic studio environments generated for product placement.",
   },
   {
     n: 4,
-    title: "Slideshows",
-    body: "Clone a slideshow from a link, swap the text and assets, and turn one layout into a dozen variations.",
+    title: "Psychological Hook & Script Remixing",
+    body: "Multiply one product message across diverse psychological angles: curiosity loops, pain-point agitation, sensory ASMR unboxings, and viral problem-solving hooks.",
     tone: "sky-indigo",
-    posters: ["/media/posters/clip-04.jpg", "/media/posters/clip-20.jpg"],
-    frameLabel: "One slideshow layout carrying two different sets of copy and product shots.",
+    items: [
+      {
+        poster: "/media/real-ads/ex-secret-hack.jpg",
+        video: "/media/real-ads/ex-secret-hack.mp4",
+        title: "Secret Hack Curiosity Hook",
+      },
+      {
+        poster: "/media/real-ads/ex-gadget-saved-me.jpg",
+        video: "/media/real-ads/ex-gadget-saved-me.mp4",
+        title: "Problem / Solution Angle",
+      },
+    ],
+    frameLabel: "Two different creative hook angles generated from the same core value prop.",
   },
   {
     n: 5,
-    title: "Edit",
-    body: "Fine-tune timing, captions, and product callouts on the timeline, then export the final cut.",
+    title: "Timeline Pacing & Dynamic Captions",
+    body: "Fine-tune beat transitions, dynamic animated subtitles, sound effects, and product callouts directly on the timeline. Preview changes instantly with zero rendering lag.",
     tone: "pink-orange",
-    posters: ["/media/posters/clip-06.jpg", "/media/posters/clip-14.jpg"],
-    frameLabel: "A rough cut and the finished cut after timing and captions were tuned.",
+    items: [
+      {
+        poster: "/media/real-ads/ex-unboxing.jpg",
+        video: "/media/real-ads/ex-unboxing.mp4",
+        title: "Dynamic Subtitle Cut",
+      },
+      {
+        poster: "/media/real-ads/ex-unboxing-asmr.jpg",
+        video: "/media/real-ads/ex-unboxing-asmr.mp4",
+        title: "Paced ASMR Cut",
+      },
+    ],
+    frameLabel: "Timeline fine-tuning showing kinetic captions and scene pacing.",
   },
   {
     n: 6,
-    title: "Bulk edit",
-    body: "Turn one approved video into a batch. Swap copy, products, and hooks in a spreadsheet, then export the whole set at once.",
+    title: "10× Multi-Variant Batch Export",
+    body: "Turn one approved creative into 10+ variations ready for Meta Advantage+, TikTok Spark Ads, and YouTube Shorts. Test creative breadth at scale to beat creative fatigue.",
     tone: "mint-sky",
-    posters: ["/media/posters/clip-05.jpg", "/media/posters/clip-21.jpg"],
-    frameLabel: "Two exports from the same batch, each with a different hook and product.",
+    items: [
+      {
+        poster: "/media/real-ads/ex-couple-sharing.jpg",
+        video: "/media/real-ads/ex-couple-sharing.mp4",
+        title: "Lifestyle Ad Variant",
+      },
+      {
+        poster: "/media/real-ads/ex-tvspot.jpg",
+        video: "/media/real-ads/ex-tvspot.mp4",
+        title: "Cinematic TV Spot Variant",
+      },
+    ],
+    frameLabel: "Two exports from the same batch, each optimized for ad platform algorithms.",
   },
 ];
 
@@ -84,8 +139,8 @@ export function HowItWorks() {
     <Section id={SECTION_IDS.howItWorks} className="bg-surface">
       <Container className="flex flex-col gap-16 lg:gap-24">
         <SectionHeading
-          title="How it works"
-          sub="Six moves, in the order you actually make them: start from something that already performs, then take it apart, rebuild it, and multiply it."
+          title="How Avelon works"
+          sub="Six powerful steps, from deconstructing what already converts to multiplying variations at scale — all inside your browser."
         />
 
         <ol className="flex flex-col gap-16 md:gap-20 lg:gap-24">
@@ -101,20 +156,13 @@ export function HowItWorks() {
                     >
                       {step.n}
                     </span>
-                    <h3 className="text-title-lg text-ink-950">{step.title}</h3>
-                    <p className="max-w-measure text-body-md text-ink-500">{step.body}</p>
+                    <h3 className="text-title-lg text-ink-950 font-sans tracking-tight">{step.title}</h3>
+                    <p className="max-w-measure text-body-md text-ink-600 leading-relaxed">{step.body}</p>
                   </div>
 
-                  {/*
-                    The bleed hugs the screenshots with 24px of padding
-                    (SPEC §6.3) rather than spanning the whole column. Capping
-                    it here — not on the inner grid — keeps the gradient and the
-                    stills the same object instead of a slab with pictures
-                    floating in it.
-                  */}
                   <div
                     className={cn(
-                      "relative mx-auto w-full max-w-frame overflow-hidden rounded-xl p-6",
+                      "relative mx-auto w-full max-w-frame overflow-hidden rounded-2xl p-6",
                       flipped && "lg:order-1",
                     )}
                   >
@@ -124,20 +172,39 @@ export function HowItWorks() {
                       aria-label={step.frameLabel}
                       className="relative grid grid-cols-2 gap-4"
                     >
-                      {step.posters.map((src) => (
-                        // Below the fold, so no priority — but next/image still
-                        // serves a right-sized source instead of a 540px file
-                        // for a ~200px slot.
-                        <Image
-                          key={src}
-                          src={src}
-                          alt=""
-                          width={540}
-                          height={960}
-                          sizes="(min-width: 1024px) 220px, 40vw"
-                          loading="lazy"
-                          className="h-auto w-full rounded-lg bg-ink-100 object-cover shadow-elev-2"
-                        />
+                      {step.items.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="group relative aspect-ad w-full overflow-hidden rounded-xl bg-ink-950 shadow-elev-2 transition-ui hover:shadow-elev-3"
+                        >
+                          {item.video ? (
+                            <video
+                              src={item.video}
+                              poster={item.poster}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              preload="none"
+                              className="h-full w-full object-cover transition-ui group-hover:scale-105"
+                            />
+                          ) : (
+                            <Image
+                              src={item.poster}
+                              alt={item.title ?? ""}
+                              fill
+                              sizes="(min-width: 1024px) 220px, 40vw"
+                              loading="lazy"
+                              className="h-full w-full object-cover transition-ui group-hover:scale-105"
+                            />
+                          )}
+
+                          {item.title ? (
+                            <div className="absolute inset-x-2 bottom-2 rounded-md bg-black/70 px-2 py-1 text-label font-medium text-white/95 backdrop-blur-md">
+                              {item.title}
+                            </div>
+                          ) : null}
+                        </div>
                       ))}
                     </div>
                   </div>

@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
  * comes second in the DOM so that the offer is explained before it is priced —
  * which is also the order a screen reader will read it in.
  */
-export function EnterpriseSlab({ plan, onSelect }: { plan: Plan; onSelect: () => void }) {
+export function EnterpriseSlab({ plan }: { plan: Plan; onSelect?: () => void }) {
   return (
     <article className="grid gap-8 rounded-xl bg-ink-950 p-6 text-white shadow-elev-3 lg:grid-cols-3 lg:gap-16 lg:p-12">
       <div className="flex flex-col gap-6 lg:col-span-2">
@@ -45,8 +45,8 @@ export function EnterpriseSlab({ plan, onSelect }: { plan: Plan; onSelect: () =>
         <p className="text-body-md text-ink-300">
           Scoped to your onboarding, team workflow, and feature needs.
         </p>
-        <Button variant="inverse" shape="pill" size="lg" onClick={onSelect} className="mt-2">
-          Book a call
+        <Button variant="inverse" shape="pill" size="lg" disabled className="mt-2 cursor-default opacity-90">
+          Coming Soon
         </Button>
       </div>
     </article>

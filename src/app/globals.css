@@ -608,3 +608,14 @@
   background-image: radial-gradient(circle at 1px 1px, var(--color-ink-300) 1px, transparent 0);
   background-size: 16px 16px;
 }
+
+/* 9:16 vertical video ad aspect ratio */
+@utility aspect-ad {
+  aspect-ratio: 9 / 16;
+}
+
+/* 4:5 photoshoot template portrait aspect ratio */
+@utility aspect-photo {
+  aspect-ratio: 4 / 5;
+}
+

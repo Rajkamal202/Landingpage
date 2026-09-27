@@ -4,35 +4,44 @@ import { ProductFrame } from "./product-frame";
 import { Sky } from "./illustration/sky";
 import { HERO_BEATS } from "./hero-sequence";
 
-/**
- * SPEC §6.2 — act one.
- *
- * Height: the copy stack occupies the viewport less 80px (`min-h-dvh` with an
- * 80px reserve at the foot), and the screenshot frame is pulled up into that
- * reserve so its top edge lands right at the fold. The frame then carries a
- * negative bottom margin, so it bleeds past the sky and overlaps the white
- * section below — which is the "bleeding off the bottom of the viewport" the
- * spec asks for, and it survives every viewport height rather than only the
- * one it was eyeballed at.
- *
- * Contrast is handled in `illustration/sky.tsx`, where the numbers are.
- *
- * The load sequence is CSS, not Motion, and this is a SERVER component as a
- * result. Motion writes its `initial` state into the server HTML, so the
- * headline shipped at `opacity: 0` and did not appear until React had
- * hydrated — which measured a 4.7s LCP on throttled mobile, exactly equal to
- * time-to-interactive. A CSS animation starts at first paint. Same beats, same
- * choreography, no JavaScript on the critical path.
- */
-
-const HEADLINE_LINES = ["Your AI short-form ads", "editor at scale"] as const;
+const HEADLINE_LINES = ["The AI video ads studio", "built for modern DTC brands"] as const;
 
 const HERO_POSTERS = [
-  { id: "clip-01", src: "/media/posters/clip-01.jpg" },
-  { id: "clip-07", src: "/media/posters/clip-07.jpg" },
-  { id: "clip-12", src: "/media/posters/clip-12.jpg" },
-  { id: "clip-18", src: "/media/posters/clip-18.jpg" },
-  { id: "clip-22", src: "/media/posters/clip-22.jpg" },
+  {
+    id: "ex-ugc",
+    src: "/media/real-ads/ex-ugc.jpg",
+    videoSrc: "/media/real-ads/ex-ugc.mp4",
+    tag: "UGC Creator Hook",
+    title: "Real UGC Creator Video",
+  },
+  {
+    id: "ex-unboxing",
+    src: "/media/real-ads/ex-unboxing.jpg",
+    videoSrc: "/media/real-ads/ex-unboxing.mp4",
+    tag: "Unboxing Demo",
+    title: "Product Unboxing Ad",
+  },
+  {
+    id: "ex-direct",
+    src: "/media/real-ads/ex-direct-to-camera.jpg",
+    videoSrc: "/media/real-ads/ex-direct-to-camera.mp4",
+    tag: "Direct Pitch",
+    title: "Direct Founder Pitch",
+  },
+  {
+    id: "ex-pov",
+    src: "/media/real-ads/ex-camera-pov.jpg",
+    videoSrc: "/media/real-ads/ex-camera-pov.mp4",
+    tag: "Camera POV",
+    title: "First-Person Camera POV",
+  },
+  {
+    id: "ex-hack",
+    src: "/media/real-ads/ex-secret-hack.jpg",
+    videoSrc: "/media/real-ads/ex-secret-hack.mp4",
+    tag: "Secret Hack Hook",
+    title: "Viral Secret Hack",
+  },
 ] as const;
 
 /** Seconds → the `--beat` custom property the hero utilities read. */
@@ -41,17 +50,26 @@ const beat = (seconds: number) => ({ "--beat": `${seconds}s` }) as React.CSSProp
 export function Hero() {
   return (
     <section className="relative">
-      {/* dynamic: each beat's delay comes from the shared HERO_BEATS timeline,
-          so the choreography lives in one file rather than in six classNames. */}
+      {/* Dynamic atmospheric cobalt sky */}
       <div className="hero-in-fade absolute inset-0" style={beat(HERO_BEATS.sky)}>
         <Sky />
       </div>
 
-      <div className="relative mx-auto flex min-h-dvh w-full max-w-marketing flex-col px-6 pb-20 pt-32 lg:px-10">
-        <div className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
-          <h1 className="text-hero-sm md:text-hero-md lg:text-hero-lg max-w-marketing text-white">
+      <div className="relative mx-auto flex w-full max-w-marketing flex-col px-6 pb-12 pt-32 lg:px-10">
+        <div className="flex flex-col items-center gap-6 text-center">
+          {/* Coming Soon Pill Badge */}
+          <div
+            className="hero-in inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-medium text-white backdrop-blur-md shadow-sm"
+            style={beat(HERO_BEATS.sky + 0.1)}
+          >
+            <span className="size-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="eyebrow text-emerald-300">
+              Coming Soon
+            </span>
+          </div>
+
+          <h1 className="text-hero-sm md:text-hero-md lg:text-hero-lg max-w-marketing text-white font-sans tracking-tight">
             {HEADLINE_LINES.map((line, index) => (
-              // dynamic: SPEC §6.2 staggers the two headline lines 60ms apart.
               <span
                 key={line}
                 className="hero-in block"
@@ -62,15 +80,14 @@ export function Hero() {
             ))}
           </h1>
 
-          {/* dynamic: beat from the shared timeline. */}
           <p
-            className="hero-in text-body-lg max-w-measure text-white/82"
+            className="hero-in text-body-lg max-w-measure text-white/85"
             style={beat(HERO_BEATS.sub)}
           >
-            Clone what already works, then make it yours — in minutes, not weeks.
+            Transform winning video ads and product shots into high-converting video variations in minutes.
+            Scale creative testing across TikTok, Meta, and Shorts without shoots or agency retainers.
           </p>
 
-          {/* dynamic: beat from the shared timeline. */}
           <div
             className="hero-in-scale mt-2 flex w-full justify-center"
             style={beat(HERO_BEATS.cta)}
@@ -80,15 +97,15 @@ export function Hero() {
         </div>
       </div>
 
-      <Container className="relative -mt-20 lg:-mt-24">
-        {/* dynamic: the last beat — the screenshot rises 24px and scales up. */}
+      <Container className="relative mt-4 lg:mt-6">
+        {/* Real video ad showcase frame */}
         <div
           className="hero-in-lift -mb-24 lg:-mb-32"
           style={beat(HERO_BEATS.screenshot)}
         >
           <ProductFrame
             posters={HERO_POSTERS}
-            label="Five vertical ads produced in the Vireo studio, shown side by side."
+            label="Five real high-converting vertical video ads produced in the Avelon studio, running side by side."
           />
         </div>
       </Container>

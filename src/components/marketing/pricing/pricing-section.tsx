@@ -1,36 +1,10 @@
 "use client";
 
-import * as React from "react";
-import type { BillingPeriod, Plan } from "@/lib/schemas";
-import { Badge } from "@/components/ui/badge";
-import { SegmentedControl, type SegmentedItem } from "@/components/ui/segmented-control";
+import type { Plan } from "@/lib/schemas";
 import { Container, Section, SectionHeading } from "../section";
 import { SECTION_IDS } from "../site-links";
-import { CheckoutDialog, type CheckoutTarget } from "./checkout-dialog";
 import { EnterpriseSlab } from "./enterprise-slab";
 import { PlanCard } from "./plan-card";
-
-/**
- * SPEC §6.5. Plans arrive as a prop rather than through a client query: the
- * page is a server component that already awaited `listPlans()`, which keeps
- * the pricing numbers in the first HTML response instead of behind a fetch
- * waterfall (DECISIONS D12).
- *
- * Yearly is the default selection, per spec.
- */
-
-const PERIODS: readonly SegmentedItem<BillingPeriod>[] = [
-  { value: "monthly", label: "Monthly" },
-  {
-    value: "yearly",
-    label: "Yearly",
-    badge: (
-      <Badge tone="brand" size="sm" shape="pill">
-        Save 20%
-      </Badge>
-    ),
-  },
-];
 
 export interface PricingSectionProps {
   plans: readonly Plan[];
@@ -40,9 +14,6 @@ export interface PricingSectionProps {
 }
 
 export function PricingSection({ plans, headingLevel = 2, className }: PricingSectionProps) {
-  const [period, setPeriod] = React.useState<BillingPeriod>("yearly");
-  const [target, setTarget] = React.useState<CheckoutTarget | null>(null);
-
   const starter = plans.find((plan) => plan.id === "starter");
   const pro = plans.find((plan) => plan.id === "pro");
   const enterprise = plans.find((plan) => plan.id === "enterprise");
@@ -50,18 +21,12 @@ export function PricingSection({ plans, headingLevel = 2, className }: PricingSe
   return (
     <Section id={SECTION_IDS.pricing} className={className}>
       <Container className="flex flex-col gap-12 lg:gap-16">
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-8 text-center">
           <SectionHeading
             level={headingLevel}
-            title="Pricing"
-            sub="Access 100+ reference videos, templates, and every AI model we support."
-            note="Starter and Pro are self-serve. Enterprise is concierge."
-          />
-          <SegmentedControl
-            ariaLabel="Billing period"
-            items={PERIODS}
-            value={period}
-            onValueChange={setPeriod}
+            title="Plans & Capabilities"
+            sub="Access 100+ reference video templates, studio photoshoot sets, and every AI model we support."
+            note="Official pricing tiers will be revealed at launch. All plans include full commercial usage rights."
           />
         </div>
 
@@ -70,17 +35,17 @@ export function PricingSection({ plans, headingLevel = 2, className }: PricingSe
             {starter ? (
               <PlanCard
                 plan={starter}
-                period={period}
+                period="yearly"
                 tone="light"
-                onSelect={() => setTarget({ plan: starter, period })}
+                onSelect={() => {}}
               />
             ) : null}
             {pro ? (
               <PlanCard
                 plan={pro}
-                period={period}
+                period="yearly"
                 tone="dark"
-                onSelect={() => setTarget({ plan: pro, period })}
+                onSelect={() => {}}
               />
             ) : null}
           </div>
@@ -88,18 +53,11 @@ export function PricingSection({ plans, headingLevel = 2, className }: PricingSe
           {enterprise ? (
             <EnterpriseSlab
               plan={enterprise}
-              onSelect={() => setTarget({ plan: enterprise, period })}
+              onSelect={() => {}}
             />
           ) : null}
         </div>
       </Container>
-
-      <CheckoutDialog
-        target={target}
-        onOpenChange={(open) => {
-          if (!open) setTarget(null);
-        }}
-      />
     </Section>
   );
 }

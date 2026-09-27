@@ -1,14 +1,15 @@
 import { listPlans } from "@/lib/api/billing";
 import { Hero } from "@/components/marketing/hero";
+import { TemplateShowcase } from "@/components/marketing/template-showcase";
 import { HowItWorks } from "@/components/marketing/how-it-works";
 import { Comparison } from "@/components/marketing/comparison";
 import { PricingSection } from "@/components/marketing/pricing/pricing-section";
 import { Faq } from "@/components/marketing/faq";
 
 /**
- * SPEC §6 — one scrolling page. The sections are server-rendered and only the
- * pieces that genuinely need interactivity (the hero CTA, the nav cross-fade,
- * the pricing toggle, the accordion) are client islands.
+ * Avelon Coming Soon Page.
+ * Server-rendered showcase of real video and photoshoot templates,
+ * workflow deconstruction, and launch previews.
  */
 export default async function Page() {
   const plans = await listPlans();
@@ -16,6 +17,7 @@ export default async function Page() {
   return (
     <main id="main">
       <Hero />
+      <TemplateShowcase />
       <HowItWorks />
       <Comparison />
       <PricingSection plans={plans} />

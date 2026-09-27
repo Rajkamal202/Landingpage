@@ -112,7 +112,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
     <main id="main" className="flex min-h-dvh flex-col items-center justify-center px-6 py-20">
       <div className="flex w-full max-w-sheet flex-col gap-8">
         <div className="flex flex-col gap-4">
-          <Link href="/" aria-label="Vireo home" className="self-start text-ink-950">
+          <Link href="/" aria-label="Avelon home" className="self-start text-ink-950">
             <Logo size={24} />
           </Link>
           <h1 className="text-display-md text-ink-950">{copy.title}</h1>

@@ -1,21 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
-  <!--
-    The Vireo logomark, matching src/components/brand/logomark.tsx exactly:
-    three overlapping vertical rounded slats of decreasing height, each
-    knocking a gap out of the one behind it so the edges stay crisp at
-    favicon size. Ink-950 on a transparent ground.
-  -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
   <defs>
-    <mask id="b">
-      <rect width="24" height="24" fill="white" />
-      <rect x="3" y="1" width="8" height="22" rx="4" fill="black" />
-    </mask>
-    <mask id="c">
-      <rect width="24" height="24" fill="white" />
-      <rect x="8" y="5" width="8" height="17" rx="4" fill="black" />
-    </mask>
+    <linearGradient id="avelon-grad-1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0066FF" />
+      <stop offset="50%" stop-color="#9933FF" />
+      <stop offset="100%" stop-color="#FF3366" />
+    </linearGradient>
+    <linearGradient id="avelon-grad-2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D2FF" />
+      <stop offset="100%" stop-color="#0066FF" />
+    </linearGradient>
   </defs>
-  <rect x="14" y="10" width="6" height="9" rx="3" fill="#0b0c0e" opacity="0.52" mask="url(#c)" />
-  <rect x="9" y="6" width="6" height="15" rx="3" fill="#0b0c0e" opacity="0.76" mask="url(#b)" />
-  <rect x="4" y="2" width="6" height="20" rx="3" fill="#0b0c0e" />
+  <rect width="32" height="32" rx="7" fill="#0b0c0e" />
+  <!-- Stylized ribbon A -->
+  <path d="M7 25 C6 21, 10 13, 16 7 C22 13, 26 21, 25 25 C23 27, 20 23, 16 18 C12 23, 9 27, 7 25 Z" fill="url(#avelon-grad-1)" />
+  <path d="M11 20 C14 17, 18 17, 21 20 C19 16, 17 14, 16 14 C15 14, 13 16, 11 20 Z" fill="url(#avelon-grad-2)" opacity="0.9" />
 </svg>

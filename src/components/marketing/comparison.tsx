@@ -10,45 +10,28 @@ import { IconCheck, IconMinus } from "@/components/icons";
 import { Container, Section, SectionHeading } from "./section";
 import { SECTION_IDS } from "./site-links";
 
-/**
- * SPEC §6.4 — two rejected options fanned out behind the one we are arguing for.
- *
- * Two decisions worth recording:
- *
- * - **The rotation is a Motion value, not a class.** It has to animate from a
- *   wider angle to its resting angle, and it has to be zero below 768px, so a
- *   transform utility would have to be fought rather than used. Under
- *   `prefers-reduced-motion` Motion applies the resting transform instantly
- *   instead of tweening it, so the composition survives without the movement.
- * - **The de-emphasised rows are `ink-500`, not `ink-400`.** SPEC §6.4 asks for
- *   ink-400, which measures 3.1:1 on white — below the 4.5:1 SPEC §11 requires
- *   for body copy. The muted `−` chip keeps the quieter tone; the sentence next
- *   to it stays readable. Scale, rotation and elevation already carry the
- *   hierarchy without borrowing legibility to do it.
- */
-
 const AGENCY_ROWS = [
-  "$5k+ per month",
-  "Endless retakes and reshoots",
-  "Weeks of turnaround",
-  "Coordination overhead",
+  "$5k–$15k/mo monthly retainers",
+  "3–4 weeks for a single cut",
+  "Endless reshoots and talent fees",
+  "Slow testing cycle kills momentum",
 ] as const;
 
-const VIREO_ROWS = [
-  "Clone any high-performing video in minutes",
-  "Reusable AI actors",
-  "Fan one template into many variations",
-  "A fraction of the cost, at 10× the pace",
+const AVELON_ROWS = [
+  "Clone winning ad formats in minutes",
+  "Photorealistic AI UGC actors & voices",
+  "Studio photoshoot sets (Calacatta, Kyoto, etc.)",
+  "10× creative variations at 90% lower cost",
+  "Private beta early access with 50 free credits",
 ] as const;
 
 const CREATOR_ROWS = [
-  "$500+ per video",
-  "Long revision cycles",
-  "Inconsistent quality",
-  "Can't scale with demand",
+  "$300–$800 per raw video clip",
+  "High ghosting and revision latency",
+  "Inconsistent lighting & audio quality",
+  "Impossible to scale across 20+ hooks",
 ] as const;
 
-/** Resting angles, and the wider angles they settle in from. */
 const REST = 1.5;
 const ENTER = 4.5;
 
@@ -59,14 +42,14 @@ export function Comparison() {
     <Section id={SECTION_IDS.comparison} className="bg-surface">
       <Container className="flex flex-col gap-12 lg:gap-16">
         <SectionHeading
-          title="The alternatives are expensive and slow."
-          sub="Agencies and one-off creators add cost, revision cycles, and coordination. Vireo keeps production in-house and repeatable."
+          title="Traditional ad production is too slow for modern DTC."
+          sub="Agencies and freelance creators add heavy retainers, slow revision loops, and creative fatigue. Avelon puts an agile AI video studio in your browser."
         />
 
-        <div className="rounded-xl bg-ink-50 p-6 md:p-10 lg:p-16">
+        <div className="rounded-2xl bg-ink-50 p-6 md:p-10 lg:p-16 border border-ink-100">
           <div className="flex flex-col gap-6 md:grid md:grid-cols-3 md:items-center md:gap-5 lg:gap-8">
             <AsideCard
-              title="Agencies"
+              title="Creative Agencies"
               rows={AGENCY_ROWS}
               angle={fanned ? -REST : 0}
               from={fanned ? -ENTER : 0}
@@ -79,33 +62,38 @@ export function Comparison() {
               viewport={reveal.viewport}
               transition={transition.slow}
               className={cn(
-                "relative order-first rounded-xl bg-surface p-6 shadow-elev-3 md:order-none lg:p-8",
+                "relative order-first rounded-2xl bg-surface p-6 shadow-elev-4 md:order-none lg:p-8 border-2 border-brand-500",
               )}
             >
-              <span
-                aria-hidden="true"
-                className="absolute right-6 top-6 grid size-8 place-items-center rounded-pill bg-ink-950 text-white"
-              >
-                <Icon glyph={IconCheck} size={20} />
-              </span>
-              <h3 className="text-title-lg pr-10 text-ink-950">With Vireo</h3>
+              <div className="flex items-center justify-between pb-2">
+                <span className="rounded-full bg-brand-500/10 px-2.5 py-0.5 text-xs font-semibold text-brand-600">
+                  Coming Soon
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="grid size-8 place-items-center rounded-pill bg-brand-600 text-white shadow-sm"
+                >
+                  <Icon glyph={IconCheck} size={20} />
+                </span>
+              </div>
+              <h3 className="text-title-lg text-ink-950 font-sans tracking-tight">With Avelon</h3>
               <ul className="mt-6 flex flex-col gap-4">
-                {VIREO_ROWS.map((row) => (
+                {AVELON_ROWS.map((row) => (
                   <li key={row} className="flex items-start gap-3">
                     <span
                       aria-hidden="true"
-                      className="mt-0 grid size-5 shrink-0 place-items-center rounded-pill bg-ink-950 text-white"
+                      className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-pill bg-emerald-500 text-white"
                     >
                       <Icon glyph={IconCheck} size={16} />
                     </span>
-                    <span className="text-body-md text-ink-950">{row}</span>
+                    <span className="text-body-md text-ink-950 font-medium">{row}</span>
                   </li>
                 ))}
               </ul>
             </motion.article>
 
             <AsideCard
-              title="Creators"
+              title="Freelance Creators"
               rows={CREATOR_ROWS}
               angle={fanned ? REST : 0}
               from={fanned ? ENTER : 0}
@@ -133,23 +121,28 @@ function AsideCard({
 }) {
   return (
     <motion.article
-      initial={{ rotate: from, scale: fanned ? 0.92 : 1, opacity: 0 }}
-      whileInView={{ rotate: angle, scale: fanned ? 0.92 : 1, opacity: 1 }}
+      initial={{ rotate: from, opacity: 0 }}
+      whileInView={{ rotate: angle, opacity: 1 }}
       viewport={reveal.viewport}
       transition={transition.slow}
-      className="rounded-xl border border-ink-200 bg-surface p-6 shadow-elev-1"
+      // dynamic: resting angle transforms originate from the center-bottom pivot
+      style={{ transformOrigin: "center bottom" }}
+      className={cn(
+        "rounded-xl bg-surface/80 p-6 shadow-elev-1 transition-shadow hover:shadow-elev-2",
+        !fanned && "transform-none",
+      )}
     >
-      <h3 className="text-title-lg text-ink-500">{title}</h3>
-      <ul className="mt-6 flex flex-col gap-4">
+      <h3 className="text-title-md text-ink-700">{title}</h3>
+      <ul className="mt-5 flex flex-col gap-3">
         {rows.map((row) => (
-          <li key={row} className="flex items-start gap-3">
+          <li key={row} className="flex items-start gap-3 text-body-sm text-ink-500">
             <span
               aria-hidden="true"
-              className="grid size-5 shrink-0 place-items-center rounded-pill bg-ink-100 text-ink-500"
+              className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-pill bg-ink-200 text-ink-500"
             >
               <Icon glyph={IconMinus} size={16} />
             </span>
-            <span className="text-body-md text-ink-500">{row}</span>
+            <span>{row}</span>
           </li>
         ))}
       </ul>

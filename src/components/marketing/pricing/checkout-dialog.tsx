@@ -57,8 +57,8 @@ export function CheckoutDialog({
       setPhase("done");
       toast.success(concierge ? "Call requested" : "Plan confirmed", {
         description: concierge
-          ? "Someone from the Vireo team will reply within one business day."
-          : `Your ${plan.name} workspace is ready to use.`,
+          ? "Someone from the Avelon team will reply within one business day."
+          : `Your ${plan.name} workspace reservation is confirmed.`,
       });
     } catch {
       toast.error("Couldn't open checkout", {
@@ -185,8 +185,8 @@ function Confirmed({ concierge, planName }: { concierge: boolean; planName: stri
         <DialogTitle>{concierge ? "Call requested" : "Plan confirmed"}</DialogTitle>
         <DialogDescription>
           {concierge
-            ? "Someone from the Vireo team will reply within one business day to scope onboarding, templates and the features you need built."
-            : `Your ${planName} workspace is ready. Paste a link and Vireo will pull the first video apart for you.`}
+            ? "Someone from the Avelon team will reply within one business day to scope onboarding, templates and the features you need built."
+            : `Your ${planName} beta reservation is locked in. You will receive priority access when private beta begins.`}
         </DialogDescription>
       </DialogHeader>
       <DialogFooter>

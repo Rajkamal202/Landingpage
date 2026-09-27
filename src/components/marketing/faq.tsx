@@ -2,49 +2,44 @@ import { Container, Section, SectionHeading } from "./section";
 import { FaqAccordion, type FaqItem } from "./faq-accordion";
 import { SECTION_IDS } from "./site-links";
 
-/** SPEC §6.6 — the seven questions, verbatim. */
 const FAQS: readonly FaqItem[] = [
   {
-    question: "What is Vireo?",
+    question: "What is Avelon?",
     answer:
-      "An AI video studio for short-form. Paste a link to something that's working, and Vireo rebuilds it as an editable project you can make your own.",
+      "Avelon is an AI video ad studio engineered specifically for high-performance DTC brands and performance agencies. Paste a link to any winning video ad or upload product assets, and Avelon turns it into editable scenes, hyper-realistic UGC creator takes, and 10+ high-converting variations.",
   },
   {
-    question: "How does it work?",
+    question: "When will Avelon be available?",
     answer:
-      "Sign up, add your brand assets, and start creating. Generate scripts, clone formats, produce UGC-style video, and export ready for TikTok, Reels, and Shorts.",
+      "Avelon is coming soon. Connect with our community and follow announcements for release updates and feature drops.",
   },
   {
-    question: "What can I make?",
+    question: "How does Avelon work?",
     answer:
-      "Slideshows, UGC-style video, product ads, explainers, dialogue scenes, and talking-head content. All vertical, all short-form.",
+      "Add your brand assets, pick a reference video or product shot, and start creating. Avelon decomposes source videos into editable layers, casts realistic AI presenters, and exports cuts formatted for TikTok, Reels, and Shorts.",
   },
   {
-    question: "How is this different from hiring an agency?",
+    question: "What ad formats and platforms are supported?",
     answer:
-      "You keep control. No revision queues, no retainers, no waiting on someone else's calendar.",
+      "Every output is native 9:16 vertical video formatted for TikTok Ads, Meta Reels, Instagram Stories, and YouTube Shorts. We provide pre-built templates for UGC hooks, tactile ASMR unboxings, founder pitches, and luxury studio photoshoots.",
   },
   {
-    question: "What do I need to start?",
+    question: "Can I use my brand's real products and logo?",
     answer:
-      "Your brand assets — a logo and product images. Vireo supplies the visuals, voices, and everything else.",
+      "Yes. Upload your raw packshots, logos, and brand guidelines. Avelon places your exact physical product into photorealistic studio environments (such as Calacatta marble, Kyoto gardens, or liquid caustics) with physical lighting accuracy.",
   },
   {
-    question: "What's in each plan?",
+    question: "How fast is the video generation?",
     answer:
-      "Every plan includes the full editor, all models, brand kits, and export. Higher tiers add tokens, storage, and hands-on support.",
+      "Minutes. No waiting for physical shoots, talent booking, or round-trip revisions. Compose, edit, and export batch variations in a single browser session.",
   },
   {
-    question: "How fast is the first video?",
-    answer: "Minutes. No setup call, no onboarding queue. Log in and start.",
+    question: "How does Avelon differ from generic AI video tools?",
+    answer:
+      "Generic AI tools generate abstract art. Avelon is built from the ground up for direct response ROAS: hook-rate optimization, psychology-driven messaging, dynamic captions, and instant 10× variant generation for creative testing.",
   },
 ];
 
-/**
- * SPEC §6.6 — heading left and sticky until the list scrolls past, accordion
- * right. `self-start` is what makes the sticky work: a stretched grid item is
- * as tall as the accordion and therefore has nothing to stick within.
- */
 export function Faq() {
   return (
     <Section id={SECTION_IDS.faq} className="bg-surface">
@@ -52,7 +47,7 @@ export function Faq() {
         <SectionHeading
           align="start"
           title="Frequently asked questions"
-          sub="What people ask before their first clone."
+          sub="Everything you need to know about Avelon and the upcoming platform release."
           className="lg:sticky lg:top-32 lg:self-start"
         />
         <FaqAccordion items={FAQS} />

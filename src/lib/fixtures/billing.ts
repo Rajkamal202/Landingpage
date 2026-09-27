@@ -20,7 +20,7 @@ export const PLANS: readonly Plan[] = [
       "All AI generative media models",
       "1 video clone at a time",
       "1 slideshow clone at a time",
-      "No Vireo watermark",
+      "No watermark",
       "25GB storage",
     ],
     popular: false,
